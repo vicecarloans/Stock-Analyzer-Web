@@ -27,13 +27,13 @@ You need [Node.js](https://nodejs.org/en/download/) to run this
 Install Dependencies
 
 ```
-npm install
+yarn install
 ```
 
 Run the project
 
 ```
-npm start
+yarn run dev
 ```
 
 ## Deployment
@@ -42,12 +42,9 @@ Create a PR to branch `deployment` and it will automatically be deployed to serv
 
 ## Built With
 
-* [Next.js](https://nextjs.org/) - The web framework used
+* [Next.js](https://nextjs.org/) and [create-next-app](https://github.com/segmentio/create-next-app) - The web framework used
 * [Jenkins](http://ec2-52-1-4-36.compute-1.amazonaws.com) - The CI/CD tool
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+* [IBM Carbon Design System](http://www.carbondesignsystem.com/) and [Styled Components](https://github.com/styled-components/styled-components) - Styling Framework and Theme
 
 ## Authors
 
