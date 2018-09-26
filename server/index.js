@@ -1,4 +1,5 @@
 const express = require('express')
+const proxy = require('express-http-proxy')
 const next = require('next')
 
 
@@ -11,7 +12,8 @@ app
     .prepare()
     .then(() => {
         const server = express()
-        
+        // Forwarding Proxy 
+        server.use('/api', proxy('name of the API server'))
         server.get("*", (req,res) => {
             return handle(req, res)
         })
