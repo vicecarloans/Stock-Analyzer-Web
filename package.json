@@ -1,0 +1,17 @@
+{
+  "name": "create-next-example-app",
+  "scripts": {
+    "dev": "nodemon server/index.js && yarn run open",
+    "build": "next build",
+    "start": "node server/index.js",
+    "open": "open http://localhost:3000"
+  },
+  "dependencies": {
+    "concurrently": "^4.0.1",
+    "express": "^4.16.3",
+    "next": "^7.0.0",
+    "nodemon": "^1.18.4",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
+  }
+}
