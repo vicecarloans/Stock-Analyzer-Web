@@ -1,12 +1,14 @@
 import React from 'react'
 import {Button} from 'carbon-components-react'
-import {Title} from 'components/Title.styles'
+import {Link} from 'server/routes'
 import '../static/custom-carbon-theme.scss'
 
 
 const Home = () => (
   <div>
-    <Title>A Custom Title from Styled-components</Title>
+    <Link route="/about/about-us">
+      <a>Click me</a>
+    </Link>
     <Button>Hello World</Button>
   </div>
 )
