@@ -6,6 +6,7 @@ pipeline {
         }
     }
     stages {
+      try{
         stage('Build') { 
             steps {
                 sh """
@@ -15,5 +16,12 @@ pipeline {
                   """ 
             }
         }
+      }catch(e){
+        def msg = "FAILED: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)"
+        slackSend(color: "FF9FA1", message:msg) 
+        throw e;
+      }
+      def msg = "SUCESS: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)"
+      slackSend(color: "BDFFC3", message:msg) 
     }
 }
