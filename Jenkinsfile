@@ -8,7 +8,11 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'npm install' 
+                sh """
+                  pwd
+                  yarn install
+                  yarn run build
+                  """ 
             }
         }
     }
