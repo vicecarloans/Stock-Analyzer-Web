@@ -6,8 +6,8 @@ pipeline {
         }
     }
     stages {
-      try{
         stage('Build') { 
+          try{
             steps {
                 sh """
                   pwd
@@ -15,13 +15,13 @@ pipeline {
                   yarn run build
                   """ 
             }
+          }catch(e){
+            def msg = "FAILED: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)"
+            slackSend(color: "FF9FA1", message:msg) 
+            throw e;
+          }
+          def msg = "SUCESS: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)"
+          slackSend(color: "BDFFC3", message:msg) 
         }
-      }catch(e){
-        def msg = "FAILED: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)"
-        slackSend(color: "FF9FA1", message:msg) 
-        throw e;
-      }
-      def msg = "SUCESS: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)"
-      slackSend(color: "BDFFC3", message:msg) 
     }
 }
