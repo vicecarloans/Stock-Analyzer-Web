@@ -1,7 +1,6 @@
 import React from 'react'
 import {Button} from 'carbon-components-react'
 import {Link} from 'server/routes'
-import '../static/custom-carbon-theme.scss'
 
 
 const Home = () => (
