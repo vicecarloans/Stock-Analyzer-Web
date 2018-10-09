@@ -6,23 +6,22 @@ pipeline {
         }
     }
     stages {
-        stage('Build') { 
-          node{
-            try{
-            steps {
-                sh """
-                  pwd
-                  yarn install
-                  yarn run build
-                  """ 
-            }
-            }catch(e){
-              slackSend(color: "FF9FA1", "FAILED: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)") 
-              throw e;
-            }
-            slackSend(color: "BDFFC3", "SUCCESS: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)") 
+        state('Build') {
+          steps {
+            sh """
+              pwd
+              yarn install
+              yarn run build
+            """
           }
-          
+          post {
+            success {
+              slackSend(color: "FF9FA1", "SUCCESS: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)") 
+            }
+            failure {
+              slackSend(color: "FF9FA1", "FAILED: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)") 
+            }
+          }
         }
     }
 }
