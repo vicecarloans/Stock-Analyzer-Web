@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import { Component } from 'react';
 
-import {Title} from 'components/Title.styles'
+import { Title } from 'components/Title.styles';
 
 export default class about extends Component {
   render() {
@@ -8,6 +8,6 @@ export default class about extends Component {
       <div>
         <Title>Hello there</Title>
       </div>
-    )
+    );
   }
 }
