@@ -18,9 +18,7 @@ pipeline {
         }
         stage('Post build') {
           steps {
-                sh """
-                  docker rm $(docker ps -aq)
-                  """ 
+                sh 'docker rm $(docker ps -aq)'
             }
         }
     }
