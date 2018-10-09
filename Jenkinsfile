@@ -6,6 +6,9 @@ pipeline {
             args '-p 3000:3000' 
         }
     }
+    options {
+      buildDiscarder(logRotator(numToKeepStr: '1'))
+    }
     stages {
         stage('Build') { 
             steps {
