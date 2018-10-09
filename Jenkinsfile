@@ -19,10 +19,10 @@ pipeline {
     }
     post {
       success {
-        slackSend(color: "FF9FA1", "SUCCESS: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)") 
+        slackSend(color: "FF9FA1", message: "SUCCESS: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)") 
       }
       failure {
-        slackSend(color: "FF9FA1", "FAILED: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)") 
+        slackSend(color: "FF9FA1", message: "FAILED: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n(<${env.BUILD_URL}|Open>)") 
       }
     }
 }
