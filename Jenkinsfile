@@ -16,6 +16,14 @@ pipeline {
                   """ 
             }
         }
+        stage('Post build') {
+          steps {
+            sh """
+              docker rm $(docker ps -aq)
+              docker rmi $(docker images | grep "^<none>" | awk '{print $3}')
+            """
+          }
+        }
     }
     post {
       success {
