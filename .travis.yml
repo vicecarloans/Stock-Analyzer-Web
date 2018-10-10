@@ -1,10 +1,15 @@
 sudo: required
 services:
 - docker
+stages:
+  # - Test
+  - Build
+  - name: Deploy
+    if: branch = deployment AND type IN (push)
 env:
   global:
   - REGISTRY_USER=stockanalyzerautomation
-  
+
 before_script:
 - docker pull coincard/stock-analyzer-web || true
 script:
