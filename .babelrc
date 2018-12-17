@@ -1,25 +1,26 @@
 {
-    "presets": [
-      "next/babel"
+  "presets": ["next/babel"],
+  "plugins": [
+    [
+      "styled-components",
+      {
+        "ssr": true,
+        "displayName": true,
+        "preprocess": false
+      }
     ],
-    "plugins": [
-      [
-        "styled-components",
-        {
-          "ssr": true,
-          "displayName": true,
-          "preprocess": false
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "components": "./components",
+          "server": "./server",
+          "flux": "./flux",
+          "utils": "./utils",
+          "config": "./config"
         }
-      ],
-      [
-        "module-resolver",
-        {
-          "root": ["./"],
-          "alias": {
-            "components": "./components",
-            "server": "./server"
-          }
-        }
-      ]
+      }
     ]
+  ]
 }

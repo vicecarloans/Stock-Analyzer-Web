@@ -1,0 +1,13 @@
+# top-most EditorConfig file
+root = true
+
+# Use Linux file endings and a newline at end of every line
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# 2 space indentation
+[*.js]
+indent_style = space
+indent_size = 4

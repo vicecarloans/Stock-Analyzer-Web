@@ -1,4 +1,6 @@
-const routes = require('next-routes')
+const routes = require("next-routes");
 
-module.exports = routes()
-    .add('about','about/:id')
+// param-1 : name of the route
+// param-2 : url regex
+// param-3 : pages name
+module.exports = routes().add("about", "about/:id", "about");

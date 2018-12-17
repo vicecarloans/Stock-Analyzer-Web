@@ -1,30 +1,39 @@
 sudo: required
 services:
-- docker
+  - docker
 stages:
-  # - Test
   - Build
   - name: Deploy
     if: branch = deployment AND type IN (push)
+addons:
+  sshknownhosts:
+    - 178.128.231.244
 env:
   global:
-  - REGISTRY_USER=stockanalyzerautomation
-
+    - REGISTRY_USER=stockanalyzerautomation
+    - REMOTEUSER=root
+    - REMOTEHOST=178.128.231.244
+    - PORT=3000
 before_script:
-- docker pull coincard/stock-analyzer-web || true
+  - docker pull coincard/stock-analyzer-web || true
 script:
-- docker build --pull --cache-from coincard/stock-analyzer-web --tag coincard/stock-analyzer-web
-  .
-- docker run coincard/stock-analyzer-web
+  - docker build --pull --cache-from coincard/stock-analyzer-web --tag coincard/stock-analyzer-web
+    .
+  - docker run coincard/stock-analyzer-web
 after_script:
-- docker images
+  - docker images
 before_deploy:
-- docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
 deploy:
   provider: script
-  script: docker push coincard/stock-analyzer-web
+  script:
+    - docker push coincard/stock-analyzer-web
+    - ssh -i
   on:
-    branch: master
+    branch: deployment
 notifications:
   slack:
     secure: hBKC+4DKooWgJiT4A9gJABTPtlnxEvCdROn/eN/MfVbD+9MQcIoh0scOUFq6AyMOdcaxx4fjnBUFqCgL1Lr+4uxXVJxII+BCJaObrnlw+Xnf+LRaeovUCl769joN2y4l05clRLEpDG6Rq4XG3mCvL34M/ti/WWnARRvnSngEy0p6yH7N9FDHoR+5Rgjz5VP+ZoPJAiFrfZM2zAUV3WAVllkq8W23+UsiXlH5bDNMYh/2sM4xxWmKjKTF8HwErQKbngh07H4apyLoVS9PLZv6sYr4v/xt4rCyXByA1ArjXqQUK4spYX5X4xkl2n1yHz/lria/ReCCURYCcX+VAIDq8AZNwS3sREyF3yqUwoTlL6Tsfdrg+7fvXMHOi6WGZvhENa+Y1Oze/Iv09Bx3ux2e8KlAqF/bTnemXhP2H4EZ8/YMj7vQtyr+s4XzbAqfL+j6B7V6pRM1UkX83v7wsi9qV8AV4WpT1V38R6C23zlxUAgFVCIDY/fHRMzvex1Z0BSR0UxHvDludmnKV3tb76OCcPhlXB7cmjZLE3LQL14oA9BA5Uxlu5ful5QHHERk9TfxTpikclUc2tuFFlWTbTw4ZCkEU/k9Z0wvfOcKePNFfK8R/CgXBShwes8pOtryn+KBtnIZP/HywRldMnmdlTcZfGtA3LFfsJTHQPTSIQvyn4M=
+before_install:
+  - openssl aes-256-cbc -K $encrypted_922def39450f_key -iv $encrypted_922def39450f_iv
+    -in deploy.enc -out deploy -d
