@@ -38,7 +38,8 @@ yarn run dev
 
 ## Deployment
 
-Create a PR to branch `deployment` and it will automatically be deployed to server
+* Create a PR to branch `deployment` to deploy to our production server 
+* Create a PR to branch `develop` to deploy to our [development server](https://stock-analyzer-huydam.herokuapp.com/)
 
 ## Built With
 
