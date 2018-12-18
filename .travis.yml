@@ -34,6 +34,7 @@ deploy:
   - provider: heroku
     api_key:
       secure: "ZX1u2YsndpLm9T2zy3YzR9Ih7m5iIz1/WmZurn8xG0pKcYcK0uakkmn9FKhYx5RsqX/JqnWXXnK81UupNK5hyunIbeJxfhGZBpssYgmeBLqIUKHGEv3GQ6Bz6PYaikY+NUpC3mrnwYRaNBVYkqGUo1T3NvmJ9kRBRv6ZEOUDMCnjqd/hKfM/zljmFSNSWy4k1HkHWae0ldYBtzGZTnIDIPEfyhwf+WUAB5n+dc1pfcTw1gMpQOb4mTW6Ifuv9opTfpfqGrnrlhufdasgVw0ka+t1nC5giFDpyaemN0QFVrG0rZneStLSVlutKhkCQsnqmIOiJpCQRvfbCIZWSEJCvlaUcmyJIXNqQFq/LoGnqk1YUs5cS3nkdlloLqA32K+Bn3+pwKNs6p6ouepBuV8h5wqrSKZRryU5wNMMX4xr1Wwl71rIe+AwU9vgQwbpJjKEtXmSRQ+FV/SEkaN/KqjrWvN/koEQ9TaYkkMf4CFw/1BYDOUN1nImYmx5CHOBZISKVIIEPqdrElswRu8EWGR2yUXt5i9BiK4k2Gzbgiq3bO2ELsK7IQFDXh71b2FGuN5mQiAA0BATEqE4XAq87N7ZZbzDGKD/iIIaeJ1PPVdgKFUjNYxaqBpu6eh3cPV0pPuYo71SWRHbZxT6e8+B/W5BpuOe7tVZ99EcPIheOxRSHC4="
+    app: stock-analyzer-huydam
     on:
       branch: develop
 notifications:
