@@ -4,8 +4,7 @@
     "dev": "nodemon server/index.js && yarn run open",
     "build": "next build",
     "start": "node server/index.js",
-    "open": "open http://localhost:3000",
-    "heroku-postbuild": "npm run build"
+    "open": "open http://localhost:3000"
   },
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
