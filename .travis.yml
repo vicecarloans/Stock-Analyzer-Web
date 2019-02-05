@@ -4,7 +4,7 @@ services:
 stages:
   - Build
   - name: Deploy
-    if: branch = deployment AND type IN (push) OR branch = develop
+    if: branch = deployment OR branch = develop AND type IN (push)
 addons:
   sshknownhosts:
     - 178.128.231.244
