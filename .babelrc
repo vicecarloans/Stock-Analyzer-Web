@@ -17,6 +17,7 @@
           "components": "./src/components",
           "server": "./server",
           "flux": "./src/flux",
+          "assets": "./src/assets",
           "utils": "./src/utils",
           "services": "./src/services",
           "constants": "./src/constants",
