@@ -8,6 +8,9 @@ stages:
 addons:
   sshknownhosts:
     - 178.128.231.244
+branches:
+  only:
+    - develop
 env:
   global:
     - REGISTRY_USER=stockanalyzerautomation
@@ -25,19 +28,20 @@ after_script:
 before_deploy:
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
 deploy:
-  - provider: script
-    script:
-      - docker push coincard/stock-analyzer-web
-      - ssh -i
-    on:
-      branch: deployment
-  - provider: heroku
-    api_key:
-      secure: "ZX1u2YsndpLm9T2zy3YzR9Ih7m5iIz1/WmZurn8xG0pKcYcK0uakkmn9FKhYx5RsqX/JqnWXXnK81UupNK5hyunIbeJxfhGZBpssYgmeBLqIUKHGEv3GQ6Bz6PYaikY+NUpC3mrnwYRaNBVYkqGUo1T3NvmJ9kRBRv6ZEOUDMCnjqd/hKfM/zljmFSNSWy4k1HkHWae0ldYBtzGZTnIDIPEfyhwf+WUAB5n+dc1pfcTw1gMpQOb4mTW6Ifuv9opTfpfqGrnrlhufdasgVw0ka+t1nC5giFDpyaemN0QFVrG0rZneStLSVlutKhkCQsnqmIOiJpCQRvfbCIZWSEJCvlaUcmyJIXNqQFq/LoGnqk1YUs5cS3nkdlloLqA32K+Bn3+pwKNs6p6ouepBuV8h5wqrSKZRryU5wNMMX4xr1Wwl71rIe+AwU9vgQwbpJjKEtXmSRQ+FV/SEkaN/KqjrWvN/koEQ9TaYkkMf4CFw/1BYDOUN1nImYmx5CHOBZISKVIIEPqdrElswRu8EWGR2yUXt5i9BiK4k2Gzbgiq3bO2ELsK7IQFDXh71b2FGuN5mQiAA0BATEqE4XAq87N7ZZbzDGKD/iIIaeJ1PPVdgKFUjNYxaqBpu6eh3cPV0pPuYo71SWRHbZxT6e8+B/W5BpuOe7tVZ99EcPIheOxRSHC4="
-    app: stock-analyzer-huydam
-    on:
-      branch: develop
-notifications:
+  matrix:
+    - provider: script
+      script:
+        - docker push coincard/stock-analyzer-web
+        - ssh -i
+      on:
+        branch: deployment
+    - provider: heroku
+      api_key:
+        secure: iaTwmgoZIcYI7pfvx9OPIQ5rBzROEIJE2Wh+vTuWNBzOx1zYkOFDJbPGfzwWmnD4urKATYJzpioJua2aRhApxa3DrwwSLxdtx6PnhoznjstxKxq5UCaaC55WuhcWJVrIJVuIAh8j+mdkSDPwoc5HmrOOVwSdsrdqUhoNHE/jZJN5Cx1DMef+2ZRdnHanVq3TAAkf9XvVCwH67E5D8QXu9m/120LI2PnO3BGx3ImTqGOKAKjGzP0flr358vPgzyKj67YqaloZ7Ev2y4z5W0/BsoJEYXh6HICMGnmAN5g82lEricmIMaP/R0CiFxYVez/UXgUDZD27MrRMch/A4Pox4hAqZgYtgc7B+p2urLQI9Ma+D9KpLOGMWazqrgzpmNBYDqLftToOPVmt0HQr8NIf705wYd0SOyPWZP3abH0wMLuSpWmm+dIc9ln9JiB/ZCHbyXSTjaKTk0rqydqi/xBgPVDjIFF3GUmeWyyZ3muhQEZb1GLntCPoa/njKNxdAqhFv1gigKYFVieaQk0DuXXFKuI7ctEdKk+NoJhJ/bmsDv/9GV9Q3SMMpMDS1FZOHJ2accAOjmv/J4ObDHZsKsMeb1O9fdc2yT6frukQB5+iby6kQo9QI9f54nbh0+u2rtvWvaZ0LWyY6BP9CpGYxyd+uI4btGdiXz20Yq12Wdsv/y0=
+      app: stock-analyzer-huydam
+      on:
+        branch: develop
+  notifications:
   slack:
     secure: hBKC+4DKooWgJiT4A9gJABTPtlnxEvCdROn/eN/MfVbD+9MQcIoh0scOUFq6AyMOdcaxx4fjnBUFqCgL1Lr+4uxXVJxII+BCJaObrnlw+Xnf+LRaeovUCl769joN2y4l05clRLEpDG6Rq4XG3mCvL34M/ti/WWnARRvnSngEy0p6yH7N9FDHoR+5Rgjz5VP+ZoPJAiFrfZM2zAUV3WAVllkq8W23+UsiXlH5bDNMYh/2sM4xxWmKjKTF8HwErQKbngh07H4apyLoVS9PLZv6sYr4v/xt4rCyXByA1ArjXqQUK4spYX5X4xkl2n1yHz/lria/ReCCURYCcX+VAIDq8AZNwS3sREyF3yqUwoTlL6Tsfdrg+7fvXMHOi6WGZvhENa+Y1Oze/Iv09Bx3ux2e8KlAqF/bTnemXhP2H4EZ8/YMj7vQtyr+s4XzbAqfL+j6B7V6pRM1UkX83v7wsi9qV8AV4WpT1V38R6C23zlxUAgFVCIDY/fHRMzvex1Z0BSR0UxHvDludmnKV3tb76OCcPhlXB7cmjZLE3LQL14oA9BA5Uxlu5ful5QHHERk9TfxTpikclUc2tuFFlWTbTw4ZCkEU/k9Z0wvfOcKePNFfK8R/CgXBShwes8pOtryn+KBtnIZP/HywRldMnmdlTcZfGtA3LFfsJTHQPTSIQvyn4M=
 before_install:
