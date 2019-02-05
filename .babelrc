@@ -14,10 +14,12 @@
       {
         "root": ["./"],
         "alias": {
-          "components": "./components",
+          "components": "./src/components",
           "server": "./server",
-          "flux": "./flux",
-          "utils": "./utils",
+          "flux": "./src/flux",
+          "utils": "./src/utils",
+          "services": "./src/services",
+          "constants": "./src/constants",
           "config": "./config"
         }
       }

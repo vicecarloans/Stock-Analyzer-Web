@@ -38,12 +38,13 @@ yarn run dev
 
 ## Deployment
 
-Create a PR to branch `deployment` and it will automatically be deployed to server
+* Create a PR to branch `deployment` to deploy to our production server 
+* Create a PR to branch `develop` to deploy to our [development server](https://stock-analyzer-huydam.herokuapp.com/)
 
 ## Built With
 
 * [Next.js](https://nextjs.org/) and [create-next-app](https://github.com/segmentio/create-next-app) - The web framework used
-* [Jenkins](http://ec2-52-1-4-36.compute-1.amazonaws.com) - The CI/CD tool
+* [Travis CI](https://travis-ci.com/vicecarloans/Stock-Analyzer-Web) - The CI/CD tool
 * [IBM Carbon Design System](http://www.carbondesignsystem.com/) and [Styled Components](https://github.com/styled-components/styled-components) - Styling Framework and Theme
 
 ## Authors
