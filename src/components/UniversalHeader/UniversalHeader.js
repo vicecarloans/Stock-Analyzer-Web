@@ -1,43 +1,48 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Logo from "assets/images/logo.png";
+import { SAButton } from "components/common";
 import { HEADERS } from "constants/header";
-import { Button } from "carbon-components-react";
-import { Wrapper, HeaderLeft, HeaderRight } from "./UniversalHeader.styles";
+import {
+  Wrapper,
+  HeaderLeft,
+  HeaderRight,
+  LinearGradient,
+  SectionLink
+} from "./UniversalHeader.styles";
 
 export class UniversalHeader extends Component {
-  static propTypes = {
-    prop: PropTypes
-  };
-
+  handleSignup = () => {};
   getLeft = () => {
     return (
-      <a href="/">
-        <Logo />
-      </a>
+      <HeaderLeft>
+        <a href="/">
+          <img src="static/images/logo.png" />
+        </a>
+      </HeaderLeft>
     );
   };
 
   getRight = () => {
     return (
-      <div>
+      <HeaderRight>
         {HEADERS.map(header => (
-          <a href={header.href}>{header.title}</a>
+          <SectionLink key={header.title} href={header.href}>
+            {header.title}
+          </SectionLink>
         ))}
-        <Button>Log In/Sign Up</Button>
-      </div>
+        <SAButton onClick={this.handleSignup}>Log In/Sign Up</SAButton>
+      </HeaderRight>
     );
   };
 
   render() {
     return (
-      <div>
+      <LinearGradient>
         <Wrapper>
-          <HeaderLeft>{this.getLeft()}</HeaderLeft>
-          <HeaderRight>{this.getRight()}</HeaderRight>
+          {this.getLeft()}
+          {this.getRight()}
         </Wrapper>
-      </div>
+      </LinearGradient>
     );
   }
 }
