@@ -2,8 +2,10 @@ import styled from "styled-components";
 
 export const ButtonFlat = styled.button`
   background-image: linear-gradient(to right, #2854f2, #6885f5);
-  min-width: ${props => (props.width ? props.width : 150)}px;
-  min-height: ${props => (props.height ? props.height : 40)}px;
+  min-width: ${props => (props.minWidth ? props.minWidth : 150)}px;
+  min-height: ${props => (props.minHeight ? props.minHeight : 40)}px;
+  max-width: ${props => (props.maxWidth ? props.maxWidth : 250)}px;
+  max-height: ${props => (props.maxHeight ? props.maxHeight : 52)}px;
   border-radius: 10px;
   color: #fff;
   border: none;

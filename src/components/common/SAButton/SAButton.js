@@ -4,15 +4,8 @@ import PropTypes from "prop-types";
 import { ButtonFlat } from "./SAButton.styles";
 
 export default function SAButton({ onClick, disabled, style, children }) {
-  const { width, height, fontSize } = style;
   return (
-    <ButtonFlat
-      onClick={onClick}
-      disabled={disabled}
-      width={width}
-      height={height}
-      fontSize={fontSize}
-    >
+    <ButtonFlat onClick={onClick} disabled={disabled} {...style}>
       {children}
     </ButtonFlat>
   );

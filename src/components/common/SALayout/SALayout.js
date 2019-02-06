@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { DarkBackground, ContentWrapper } from "./SALayout.styles";
-import { UniversalHeader } from "components/UniversalHeader";
+import { UniversalHeader } from "components/common";
 export default class SALayout extends PureComponent {
   render() {
     return (
