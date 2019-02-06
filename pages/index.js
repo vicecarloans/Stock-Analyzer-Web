@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { SALayout } from "components/common/SALayout";
 import combineSelectors from "utils/combineSelectors";
 import { userSelector, loadingSelector, registerUser } from "flux/ducks/auth";
+import { UnauthorizedLanding } from "components/Landing";
 import { Payment } from "components/Payment";
 
 class Home extends Component {
@@ -22,8 +23,9 @@ class Home extends Component {
   render() {
     return (
       <SALayout>
-        <Payment />
-        <Button onClick={this.handleRegister}>Register</Button>
+        {/* <Payment />
+        <Button onClick={this.handleRegister}>Register</Button> */}
+        <UnauthorizedLanding />
       </SALayout>
     );
   }

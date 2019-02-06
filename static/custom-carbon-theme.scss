@@ -1,3 +1,9 @@
-@import './carbon-theme.scss';
+@import "./carbon-theme.scss";
 
-@import '../node_modules/carbon-components/scss/globals/scss/styles.scss';
+@import "../node_modules/carbon-components/scss/globals/scss/styles.scss";
+
+div {
+  canvas {
+    max-height: 700px;
+  }
+}

@@ -13,10 +13,7 @@ export default class MyCustomDocument extends Document {
   render() {
     return (
       <html>
-        <Head>
-          {/* <title>My Page Title</title> */}
-          {this.props.styleTags}
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />
