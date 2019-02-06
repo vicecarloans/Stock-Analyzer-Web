@@ -25,18 +25,20 @@ after_script:
 before_deploy:
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
 deploy:
-  - provider: script
-    script:
-      - docker push coincard/stock-analyzer-web
-      - ssh -i
-    on:
-      branch: deployment
-  - provider: heroku
-    api_key:
-      secure: "ZX1u2YsndpLm9T2zy3YzR9Ih7m5iIz1/WmZurn8xG0pKcYcK0uakkmn9FKhYx5RsqX/JqnWXXnK81UupNK5hyunIbeJxfhGZBpssYgmeBLqIUKHGEv3GQ6Bz6PYaikY+NUpC3mrnwYRaNBVYkqGUo1T3NvmJ9kRBRv6ZEOUDMCnjqd/hKfM/zljmFSNSWy4k1HkHWae0ldYBtzGZTnIDIPEfyhwf+WUAB5n+dc1pfcTw1gMpQOb4mTW6Ifuv9opTfpfqGrnrlhufdasgVw0ka+t1nC5giFDpyaemN0QFVrG0rZneStLSVlutKhkCQsnqmIOiJpCQRvfbCIZWSEJCvlaUcmyJIXNqQFq/LoGnqk1YUs5cS3nkdlloLqA32K+Bn3+pwKNs6p6ouepBuV8h5wqrSKZRryU5wNMMX4xr1Wwl71rIe+AwU9vgQwbpJjKEtXmSRQ+FV/SEkaN/KqjrWvN/koEQ9TaYkkMf4CFw/1BYDOUN1nImYmx5CHOBZISKVIIEPqdrElswRu8EWGR2yUXt5i9BiK4k2Gzbgiq3bO2ELsK7IQFDXh71b2FGuN5mQiAA0BATEqE4XAq87N7ZZbzDGKD/iIIaeJ1PPVdgKFUjNYxaqBpu6eh3cPV0pPuYo71SWRHbZxT6e8+B/W5BpuOe7tVZ99EcPIheOxRSHC4="
-    app: stock-analyzer-huydam
-    on:
-      branch: develop
+  matrix:
+    - provider: script
+      script:
+        - docker push coincard/stock-analyzer-web
+        - ssh -i
+      on:
+        branch: deployment
+    - provider: heroku
+      api_key:
+        secure: Nr4Isx4YAesXrl8Ex8j3O4978gbCVkd+qhjrVgrTFkaVWrs7jXZDF2gjgrRBbhSL/v7s58zGvuddmsVLKvP8UpzomfgQJW2X2y+oOTUlr/eiq33UUF3pxGjBDUlYFlBkGFp8OF1iz5EWbFEUPP4puqTiBrYWUNZElXyad0HFeIXmFIY+/KfLkiEEhjEWEOZ2TnGXruEUJ/yqqRJDZx4wtBKQAN48zNQI89N07HTyOOAMgw4JlVCfUmuTkVrmw5iM/OGtRv2DMJA4PV5KXy9VLLSAH5i1l+wgaRBNnb33Kgbj9i3pT9vESwXR1ZNUqya5V/9gy1nQmB/tUfYfzy5uXJb/pBfwjOuPjFesvwhg3GYlE8CHmKCyhIZuI6DVBF1TgH/LIjtBbDg3YBrnDhzaNujf9BqWd6jimNR5TjZMu9uxz/7pSs2YTmAei1ddJCJ42uybXtdMaWWO9Q1110pa+9Nyq5FOCN0yCvxuyjnQGpUUN2+rVN2OLFDigK9+AbaII3vKE6PyaIvNGz/H6CvskM0QpgsLvsLXyd117c6w3aNZWq8MSu7uAozfdSs4yyO0dcIjxyzsWm6kmwaasXqrrpmMzev1Kn/QLAcLGnHCsCo7gkNNdDsBYIod1hnMYTleTrP4UOUndvr8PhD5lbNcUKwVNU2zceqvxwVORRb3wD8=
+      app: stock-analyzer-huydam
+      on:
+        branch: develop
+
 notifications:
   slack:
     secure: hBKC+4DKooWgJiT4A9gJABTPtlnxEvCdROn/eN/MfVbD+9MQcIoh0scOUFq6AyMOdcaxx4fjnBUFqCgL1Lr+4uxXVJxII+BCJaObrnlw+Xnf+LRaeovUCl769joN2y4l05clRLEpDG6Rq4XG3mCvL34M/ti/WWnARRvnSngEy0p6yH7N9FDHoR+5Rgjz5VP+ZoPJAiFrfZM2zAUV3WAVllkq8W23+UsiXlH5bDNMYh/2sM4xxWmKjKTF8HwErQKbngh07H4apyLoVS9PLZv6sYr4v/xt4rCyXByA1ArjXqQUK4spYX5X4xkl2n1yHz/lria/ReCCURYCcX+VAIDq8AZNwS3sREyF3yqUwoTlL6Tsfdrg+7fvXMHOi6WGZvhENa+Y1Oze/Iv09Bx3ux2e8KlAqF/bTnemXhP2H4EZ8/YMj7vQtyr+s4XzbAqfL+j6B7V6pRM1UkX83v7wsi9qV8AV4WpT1V38R6C23zlxUAgFVCIDY/fHRMzvex1Z0BSR0UxHvDludmnKV3tb76OCcPhlXB7cmjZLE3LQL14oA9BA5Uxlu5ful5QHHERk9TfxTpikclUc2tuFFlWTbTw4ZCkEU/k9Z0wvfOcKePNFfK8R/CgXBShwes8pOtryn+KBtnIZP/HywRldMnmdlTcZfGtA3LFfsJTHQPTSIQvyn4M=
