@@ -4,7 +4,7 @@ services:
 stages:
   - Build
   - name: Deploy
-    if: branch = deployment AND type IN (push) OR branch = develop
+    if: branch = deployment OR branch = develop AND type IN (push)
 addons:
   sshknownhosts:
     - 178.128.231.244
@@ -25,19 +25,18 @@ after_script:
 before_deploy:
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
 deploy:
-  matrix:
-    - provider: script
-      script:
-        - docker push coincard/stock-analyzer-web
-        - ssh -i
-      on:
-        branch: deployment
-    - provider: heroku
-      api_key:
-        secure: 84e50f7b-bdb8-4b1a-8d9a-fcf305fca481
-      app: stock-analyzer-huydam
-      on:
-        branch: develop
+  - provider: script
+    script:
+      - docker push coincard/stock-analyzer-web
+      - ssh -i
+    on:
+      branch: deployment
+  - provider: heroku
+    api_key:
+      secure: 84e50f7b-bdb8-4b1a-8d9a-fcf305fca481
+    app: stock-analyzer-huydam
+    on:
+      branch: develop
 
 notifications:
   slack:
