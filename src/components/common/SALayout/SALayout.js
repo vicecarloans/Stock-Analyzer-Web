@@ -1,12 +1,13 @@
 import React, { PureComponent } from "react";
-import { LinearGradient } from "./SALayout.styles";
+import { LinearGradient, DarkBackground } from "./SALayout.styles";
 
 export default class SALayout extends PureComponent {
   render() {
     return (
-      <div>
+      <DarkBackground>
         <LinearGradient />
-      </div>
+        {this.props.children}
+      </DarkBackground>
     );
   }
 }

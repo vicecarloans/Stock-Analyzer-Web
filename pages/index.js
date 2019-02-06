@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "carbon-components-react";
 import { Link } from "server/routes";
 import { connect } from "react-redux";
+import { SALayout } from "components/common/SALayout";
 import combineSelectors from "utils/combineSelectors";
 import { userSelector, loadingSelector, registerUser } from "flux/ducks/auth";
 import { Payment } from "components/Payment";
@@ -20,10 +21,10 @@ class Home extends Component {
   };
   render() {
     return (
-      <div>
+      <SALayout>
         <Payment />
         <Button onClick={this.handleRegister}>Register</Button>
-      </div>
+      </SALayout>
     );
   }
 }
