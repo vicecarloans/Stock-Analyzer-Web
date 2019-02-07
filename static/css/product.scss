@@ -57,7 +57,7 @@
 .icon {
   width: 250px;
   height: 100%;
-  min-height: 250px;
+  height: 250px;
   background-size: cover;
   border-radius: 100%;
   background-position: center;
@@ -90,4 +90,7 @@
 
 .content-box {
   padding-left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }

@@ -17,7 +17,7 @@ export class Introduction extends Component {
   };
   render() {
     return (
-      <Wrapper id="home">
+      <Wrapper id="top">
         <div style={{ zIndex: 10 }}>
           <Title>Stock Analyzer</Title>
           <Title>Investment &amp; Risk Analysis Platform</Title>
