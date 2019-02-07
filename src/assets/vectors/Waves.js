@@ -2,8 +2,8 @@ import React from "react";
 import Svg, { Path, G } from "svgs";
 import PropTypes from "prop-types";
 
-const Waves = ({ fill, width, height }) => (
-  <Svg x="0" y="0" width={width} height={height} viewBox="0 0 1920 181.1">
+const Waves = ({ fill }) => (
+  <Svg x="0" y="0" viewBox="0 0 1920 181.1">
     <G>
       <Path
         fill={fill}
@@ -18,15 +18,11 @@ const Waves = ({ fill, width, height }) => (
 );
 
 Waves.propTypes = {
-  fill: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string
+  fill: PropTypes.string
 };
 
 Waves.defaultProps = {
-  fill: "#0E102B",
-  width: "1920",
-  height: "181.1"
+  fill: "#0E102B"
 };
 
 export default Waves;

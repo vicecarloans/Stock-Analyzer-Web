@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const AboutWrapper = styled.div`
-  margin-top: -2px;
+  margin-top: -10px;
+  padding-top: 10px;
   text-align: center;
   width: 100vw;
   min-height: 70vh;
@@ -12,7 +13,7 @@ export const AboutWrapper = styled.div`
 export const Title = styled.h1`
   font-family: "IBM Plex Sans", sans-serif;
   font-size: 40px;
-  font-weight: 400;
+  font-weight: bold;
   margin-bottom: 40px;
   color: #fff;
 `;

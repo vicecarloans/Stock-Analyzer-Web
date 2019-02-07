@@ -1,3 +1,24 @@
 @import "./carbon-theme.scss";
 
 @import "../node_modules/carbon-components/scss/globals/scss/styles.scss";
+
+body {
+  overflow-x: hidden;
+}
+
+.bx--grid {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 75vw;
+}
+
+.plans {
+  margin-top: 20px;
+}

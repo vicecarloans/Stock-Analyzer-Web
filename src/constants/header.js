@@ -1,7 +1,7 @@
 export const HEADERS = [
   {
     title: "Home",
-    href: ""
+    href: "#top"
   },
   {
     title: "Features",

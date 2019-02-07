@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { FEATURES } from "constants/features";
+import { FEATURES } from "constants/landing/features";
 import "static/css/product.scss";
 
 export default class FeatureTree extends PureComponent {
