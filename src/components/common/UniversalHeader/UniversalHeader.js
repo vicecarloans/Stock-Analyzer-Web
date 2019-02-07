@@ -26,7 +26,7 @@ export class UniversalHeader extends Component {
     return (
       <HeaderRight>
         {HEADERS.map(header => (
-          <SectionLink key={header.title} href={header.href}>
+          <SectionLink data-scroll key={header.title} href={header.href}>
             {header.title}
           </SectionLink>
         ))}

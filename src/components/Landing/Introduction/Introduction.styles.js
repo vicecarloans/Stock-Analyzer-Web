@@ -9,7 +9,7 @@ export const Title = styled.h1`
 
 export const Wrapper = styled.div`
   width: 100vw;
-  min-height: 70vh;
+  min-height: 100vh;
   text-align: center;
   display: flex;
   flex-direction: column;
