@@ -1,5 +1,7 @@
+/* eslint-disable */
 import Document, { Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
+
 export default class MyCustomDocument extends Document {
   static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet();
@@ -13,7 +15,13 @@ export default class MyCustomDocument extends Document {
   render() {
     return (
       <html>
-        <Head />
+        <Head>
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="/static/css/nprogress.css"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />

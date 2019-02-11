@@ -22,3 +22,31 @@ body {
 .plans {
   margin-top: 20px;
 }
+
+.align-center {
+  display: flex;
+  justify-content: center;
+}
+
+.bx--form-item {
+  width: 80%;
+  margin: 15px 0;
+  flex: initial;
+}
+
+.bx--label {
+  color: #282a2c;
+  cursor: pointer;
+
+  & ~ .bx--text-input {
+    color: #fff;
+  }
+}
+
+.bx--text-input {
+  width: 100%;
+  border-radius: 5px;
+  &:focus {
+    background-color: #2c2c30;
+  }
+}
