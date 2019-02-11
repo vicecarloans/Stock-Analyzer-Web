@@ -29,11 +29,12 @@ export const SubTitle = styled(Text)`
 `;
 
 export const SinglePlanWrapper = styled.div`
-  width: 370px;
+  width: 400px;
   height: 550px;
   text-align: center;
   background-color: ${props => props.color};
   padding: 40px 20px;
+  margin: 40px 20px;
 `;
 
 export const Type = styled(Text)`

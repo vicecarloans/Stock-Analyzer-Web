@@ -9,7 +9,7 @@ import PlanType from "./PlanType";
 export class Plans extends Component {
   renderPlan = () => {
     return PLANS.map(plan => (
-      <div className="bx--col-lg-4 bx--col-md-12" key={plan.id}>
+      <div className="bx--col-xl-4 bx--col-lg-12 align-center" key={plan.id}>
         <PlanType
           color={plan.color}
           type={plan.type}

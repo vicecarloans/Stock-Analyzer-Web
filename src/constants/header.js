@@ -1,18 +1,22 @@
 export const HEADERS = [
   {
     title: "Home",
-    href: "#top"
+    href: "/#top",
+    hash: "#top"
   },
   {
     title: "Features",
-    href: "#features"
+    href: "/#features",
+    hash: "#features"
   },
   {
     title: "Team",
-    href: "#team"
+    href: "/#team",
+    hash: "#team"
   },
   {
     title: "Plan",
-    href: "#plan"
+    href: "/#plan",
+    hash: "#plan"
   }
 ];
