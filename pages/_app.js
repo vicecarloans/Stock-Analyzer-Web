@@ -5,7 +5,15 @@ import withReduxSaga from "next-redux-saga";
 import createStore from "flux/createStore";
 import { Provider } from "react-redux";
 import "../static/custom-carbon-theme.scss";
+import NProgress from "nprogress";
+import { Router } from "server/routes";
 
+Router.events.on("routeChangeStart", url => {
+  console.log(`Loading: ${url}`);
+  NProgress.start();
+});
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};

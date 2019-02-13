@@ -14,12 +14,6 @@ app
   .prepare()
   .then(() => {
     const server = express();
-
-    // Forwarding Proxy
-    server.use("/api", proxy("name of the API server"));
-    server.get("/about/:id", (req, res) => {
-      return app.render(req, res, "/about", req.params.id);
-    });
     server.use(handler);
     server.listen(PORT, err => {
       if (err) throw err;

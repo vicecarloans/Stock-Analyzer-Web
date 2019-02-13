@@ -42,6 +42,7 @@ export const SectionLink = styled.a`
   text-decoration: none;
   color: #fff;
   font-family: "IBM Plex Sans", sans-serif;
+  cursor: pointer;
   &:hover {
     color: #bad4ff;
   }

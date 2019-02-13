@@ -29,3 +29,14 @@ export const registerUserFailed = err => ({
     err
   }
 });
+
+export const NEXT_STEP = "NEXT_STEP";
+export const goToNextStep = () => ({
+  type: NEXT_STEP
+});
+
+export const PREVIOUS_STEP = "PREVIOUS_STEP";
+
+export const backToPreviousStep = () => ({
+  type: PREVIOUS_STEP
+});

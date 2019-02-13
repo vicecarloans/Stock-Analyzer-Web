@@ -6,6 +6,7 @@ export const ButtonFlat = styled.button`
   min-height: ${props => (props.minHeight ? props.minHeight : 40)}px;
   max-width: ${props => (props.maxWidth ? props.maxWidth : 250)}px;
   max-height: ${props => (props.maxHeight ? props.maxHeight : 52)}px;
+  margin: ${props => props.margin};
   border-radius: 10px;
   color: #fff;
   border: none;

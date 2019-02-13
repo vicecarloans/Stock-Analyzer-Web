@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { SAButton } from "components/common";
 import { HEADERS } from "constants/header";
+import { Router, Link } from "server/routes";
+import jump from "jump.js";
 import {
   Wrapper,
   HeaderLeft,
@@ -11,29 +13,44 @@ import {
 } from "./UniversalHeader.styles";
 
 export class UniversalHeader extends Component {
-  handleSignup = () => {};
-  getLeft = () => {
-    return (
-      <HeaderLeft>
-        <a href="/">
-          <img src="static/images/logo.png" />
-        </a>
-      </HeaderLeft>
-    );
+  componentDidMount() {
+    Router.prefetchRoute("/login");
+  }
+
+  handleSignup = () => {
+    Router.pushRoute("/login");
   };
 
-  getRight = () => {
-    return (
-      <HeaderRight>
-        {HEADERS.map(header => (
-          <SectionLink data-scroll key={header.title} href={header.href}>
+  getLeft = () => (
+    <HeaderLeft>
+      <Link prefetch route="/">
+        <img
+          style={{ cursor: "pointer" }}
+          src="static/images/logo.png"
+          alt="Stock Analyzer Logo"
+        />
+      </Link>
+    </HeaderLeft>
+  );
+
+  handleSectionClick = hash => {
+    if (window.location.pathname === "/" && hash) {
+      jump(hash);
+    }
+  };
+
+  getRight = () => (
+    <HeaderRight>
+      {HEADERS.map(header => (
+        <Link scroll route={header.href} key={header.title}>
+          <SectionLink onClick={() => this.handleSectionClick(header.hash)}>
             {header.title}
           </SectionLink>
-        ))}
-        <SAButton onClick={this.handleSignup}>Log In/Sign Up</SAButton>
-      </HeaderRight>
-    );
-  };
+        </Link>
+      ))}
+      <SAButton onClick={this.handleSignup}>Log In/Sign Up</SAButton>
+    </HeaderRight>
+  );
 
   render() {
     return (
