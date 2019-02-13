@@ -5,7 +5,7 @@ export const TEAM = [
     title: "(CTO & Co-Founder)",
     picture: "duc-icon",
     bio:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "Professional Software Developer with an expertice of 7 years in the fields of Data Analysis, Full-Stack Development and Machine Learning technologies. Duc has extensive skills working with programming languages such as PHP, Java and JavaScript. In addition, he has rich experience with frameworks such as Node, React and Vue."
   },
   {
     id: 1,
@@ -13,7 +13,7 @@ export const TEAM = [
     title: "(CEO & Co-Founder)",
     picture: "allan-icon",
     bio:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "Professional Software Tester with an expertice of 5 years in the fields of Functional and Automation Testing in the branches of Online Banking, Telecommunications, and International Trade. Allan has extensive skills working with testing tools such as Quality Center and Microsoft Test Manager. In addition, he has strong experience with programming languages such as Javascript and C#."
   },
   {
     id: 2,
@@ -21,6 +21,6 @@ export const TEAM = [
     title: "(Fullstack & Co-Founder)",
     picture: "huy-icon",
     bio:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "Professional Software Developer with an expertice of 5 years in the fields of Full-Stack Development and back-end devlopment. Huy has extensive skills working with AWS services and Microservices Architecture implementing tools such as Kubernetes, Docker, CI/CD, and Jenkins. He has rich experience with framworks such as Node, Angular, and React",
   }
 ];
