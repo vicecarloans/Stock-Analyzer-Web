@@ -61,7 +61,7 @@ export function* loginUserSaga() {
 
     const res = yield call(
       Axios.post,
-      `${API_BASE_PATH}${USER_LOGIN_ENDPOINT}`,
+      `${USER_LOGIN_ENDPOINT}`,
       JSON.stringify(body),
       REQUEST_HEADERS_AUTH
     );

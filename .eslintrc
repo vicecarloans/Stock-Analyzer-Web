@@ -5,7 +5,7 @@
     "commonjs": true
   },
 
-  "extends": ["eslint:recommended", "airbnb"],
+  "extends": ["eslint:recommended"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {

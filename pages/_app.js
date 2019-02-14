@@ -37,7 +37,7 @@ class MyApp extends App {
       if (isServer) {
         const { cookie } = req.headers;
         const { data } = await Axios.get(
-          `${API_BASE_PATH}${USER_PROFILE_ENDPOINT}`,
+          `http://localhost:3000${USER_PROFILE_ENDPOINT}`,
           REQUEST_HEADERS_AUTH_MANUAL_COOKIE(cookie)
         );
         pageProps.user = JSON.stringify(data);
@@ -50,7 +50,7 @@ class MyApp extends App {
         }
       } else {
         const { data } = await Axios.get(
-          `${API_BASE_PATH}${USER_PROFILE_ENDPOINT}`,
+          `${USER_PROFILE_ENDPOINT}`,
           REQUEST_HEADERS_AUTH
         );
 
