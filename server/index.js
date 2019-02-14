@@ -85,7 +85,7 @@ app
           console.log(data);
           return res.json(data);
         }
-        throw new Error({ status: 500, message: "No token found" });
+        throw new Error({ status: 401, message: "No token found" });
       } catch (err) {
         throw new Error({ status: err.status, message: err.message });
       }

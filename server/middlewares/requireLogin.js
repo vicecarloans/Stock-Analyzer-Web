@@ -4,15 +4,14 @@ const SessionModel = mongoose.model("sessions");
 module.exports = async (req, res, next) => {
   try {
     const data = await SessionModel.findById(req.cookies.session_id);
-    if (!data) {
+    if (!data.token) {
       const error = new Error("Unauthorized");
       error.status = 401;
-      next(error);
-      return;
+      return next(error);
     }
     req.token = data.token;
-    next();
+    return next();
   } catch (err) {
-    next(new Error({ status: 500, message: err.message }));
+    return next(new Error({ status: 500, message: err.message }));
   }
 };
