@@ -62,7 +62,7 @@ app
           httpOnly: true
         });
 
-        res.json({ status: 1, message: "User signed in successfully" });
+        return res.json({ status: 1, message: "User signed in successfully" });
       } catch (err) {
         const error = new Error(err.message);
         error.status = 400;
@@ -72,17 +72,20 @@ app
 
     server.get("/api/user", requireLogin, async (req, res) => {
       try {
-        const { data } = await axios.get(
-          "https://stock-analyzer-api.herokuapp.com/api/user",
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + req.token
+        if (req.token) {
+          const { data } = await axios.get(
+            "https://stock-analyzer-api.herokuapp.com/api/user",
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + req.token
+              }
             }
-          }
-        );
-        console.log(data);
-        res.json(data);
+          );
+          console.log(data);
+          return res.json(data);
+        }
+        throw new Error({ status: 500, message: "No token found" });
       } catch (err) {
         throw new Error({ status: err.status, message: err.message });
       }
