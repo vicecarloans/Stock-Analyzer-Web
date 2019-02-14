@@ -38,7 +38,7 @@ app
     );
     server.use(bodyParser.json());
 
-    server.post("/api/auth/signin", async (req, res) => {
+    server.post("/api/auth/signin", async (req, res, next) => {
       try {
         const body = { ...req.body };
         const { data } = await axios.post(
@@ -48,15 +48,12 @@ app
             headers: { "Content-Type": "application/json" }
           }
         );
-        const sessionID = uuidv4();
 
         const session = new SessionModel({
-          sessionID,
           token: data.token
         });
 
         const result = await session.save();
-        console.log(result);
         res.cookie("session_id", result._id, {
           maxAge: 3600000,
           httpOnly: true
@@ -64,9 +61,7 @@ app
 
         return res.json({ status: 1, message: "User signed in successfully" });
       } catch (err) {
-        const error = new Error(err.message);
-        error.status = 400;
-        throw err;
+        next(new Error({ status: 400, message: "Wrong email/password" }));
       }
     });
 
@@ -94,7 +89,7 @@ app
     server.use(handler);
 
     server.use(function(err, req, res, next) {
-      res.status(err.status || 500).json({ error: err });
+      return res.status(err.status || 500).json({ error: err });
     });
 
     server.listen(PORT, err => {

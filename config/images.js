@@ -1,6 +1,8 @@
 const withSass = require("@zeit/next-sass");
 const withCss = require("@zeit/next-css");
 const withImages = require("next-images");
+const { parsed: localEnv } = require("dotenv").config();
+const webpack = require("webpack");
 
 module.exports = withImages(
   withCss(
@@ -18,6 +20,7 @@ module.exports = withImages(
             }
           }
         });
+        config.plugins.push(new webpack.EnvironmentPlugin(localEnv));
 
         return config;
       }
