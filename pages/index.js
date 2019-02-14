@@ -6,25 +6,11 @@ import { SALayout } from "components/common/SALayout";
 import combineSelectors from "utils/combineSelectors";
 import { userSelector, loadingSelector, registerUser } from "flux/ducks/auth";
 import { UnauthorizedLanding } from "components/Landing";
-import { Payment } from "components/Payment";
 
 class Home extends Component {
-  handleRegister = () => {
-    const user = {
-      username: "vicecarloans",
-      email: "huydam1997@gmail.com",
-      password: "secret",
-      name: "Huy Dam",
-      plan: 1
-    };
-
-    this.props.registerUser(user);
-  };
   render() {
     return (
       <SALayout>
-        {/* <Payment />
-        <Button onClick={this.handleRegister}>Register</Button> */}
         <UnauthorizedLanding />
       </SALayout>
     );

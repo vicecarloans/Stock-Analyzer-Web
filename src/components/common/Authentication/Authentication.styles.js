@@ -8,9 +8,8 @@ export const AuthBody = styled.div`
 `;
 
 export const AuthWrapper = styled.div`
-    max-width: 45vw;
-    min-width: 40vw;
-    min-height: 60vh;
+    min-width: 70vw;
+    min-height: 70vh;
     border-radius: 40px;
     background-color: #CBC5C5;
     border: 1px solid #707070;
@@ -22,12 +21,7 @@ export const AuthWrapper = styled.div`
         min-width: 50vw;
     `}
     ${media.retina`
-        max-width: 45vw;
-        min-width: 40vw;
-    `}
-    ${media.highres`
-        max-width: 50vw;
-        min-width: 45vw;
+        min-width: 70vw;
     `}
 
 `;

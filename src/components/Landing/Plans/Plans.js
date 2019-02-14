@@ -1,25 +1,25 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { PlansWrapper, Title, SubTitle } from "./Plans.styles";
 import { SAButton } from "components/common";
 import { PLANS } from "constants/landing/plans";
+import { PlansWrapper, Title, SubTitle } from "./Plans.styles";
 import PlanType from "./PlanType";
 
 export class Plans extends Component {
-  renderPlan = () => {
-    return PLANS.map(plan => (
+  renderPlan = () =>
+    PLANS.map(plan => (
       <div className="bx--col-xl-4 bx--col-lg-12 align-center" key={plan.id}>
         <PlanType
           color={plan.color}
           type={plan.type}
-          price={plan.price}
+          price={`${plan.price}`}
           promotion={plan.promotion}
           description={plan.description}
         />
       </div>
     ));
-  };
+
   render() {
     return (
       <PlansWrapper id="plan">
@@ -27,7 +27,7 @@ export class Plans extends Component {
         <SubTitle>Our services come with different offers</SubTitle>
         <SAButton
           onClick={() => {}}
-          style={{ minWidth: 200, minHeight: 52, fontSize: 16 }}
+          style={{ minWidth: "200px", minHeight: "52px", fontSize: "16px" }}
         >
           Join free for a month
         </SAButton>

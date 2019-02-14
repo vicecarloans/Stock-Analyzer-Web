@@ -21,6 +21,7 @@ export default class MyCustomDocument extends Document {
             type="text/css"
             href="/static/css/nprogress.css"
           />
+          <script id="stripe-js" src="https://js.stripe.com/v3/" async />
         </Head>
         <body>
           <Main />
