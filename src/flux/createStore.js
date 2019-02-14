@@ -7,6 +7,7 @@ import rootReducer from "./rootReducer";
 import rootSaga from "./rootSaga";
 
 const SagaMiddleware = createSagaMiddleware();
+
 const persistConfig = {
   key: "SA-Client",
   storage
@@ -21,11 +22,7 @@ export default () => {
     composeWithDevTools(applyMiddleware(SagaMiddleware))
   );
 
-  store.runSagaTask = () => {
-    store.sagaTask = SagaMiddleware.run(rootSaga);
-  };
-
-  store.runSagaTask();
+  store.sagaTask = SagaMiddleware.run(rootSaga);
 
   store.__persistor = persistStore(store);
   return store;

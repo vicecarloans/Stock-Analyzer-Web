@@ -24,7 +24,7 @@ Router.events.on("routeChangeStart", url => {
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
+  static async getInitialProps({ Component, ctx, store }) {
     let pageProps = {};
 
     if (Component.getInitialProps) {
@@ -35,9 +35,10 @@ class MyApp extends App {
     const type = pathType(path);
     try {
       if (isServer) {
+        const { PORT } = process.env;
         const { cookie } = req.headers;
         const { data } = await Axios.get(
-          `http://localhost:3000${USER_PROFILE_ENDPOINT}`,
+          `http://localhost:${PORT}${USER_PROFILE_ENDPOINT}`,
           REQUEST_HEADERS_AUTH_MANUAL_COOKIE(cookie)
         );
         pageProps.user = JSON.stringify(data);
@@ -61,7 +62,6 @@ class MyApp extends App {
         }
       }
     } catch (err) {
-      console.log(err);
       if (type === 3) {
         if (isServer) {
           res.writeHead(302, {
@@ -92,4 +92,4 @@ class MyApp extends App {
   }
 }
 
-export default withRedux(createStore)(withReduxSaga(MyApp));
+export default withRedux(createStore)(withReduxSaga({ async: true })(MyApp));
