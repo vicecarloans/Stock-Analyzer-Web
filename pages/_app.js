@@ -36,8 +36,9 @@ class MyApp extends App {
     try {
       if (isServer) {
         const { cookie } = req.headers;
+        const PORT = process.env.PORT || 3000;
         const { data } = await Axios.get(
-          `http://localhost:3000${USER_PROFILE_ENDPOINT}`,
+          `http://localhost:${PORT}${USER_PROFILE_ENDPOINT}`,
           REQUEST_HEADERS_AUTH_MANUAL_COOKIE(cookie)
         );
         pageProps.user = JSON.stringify(data);
