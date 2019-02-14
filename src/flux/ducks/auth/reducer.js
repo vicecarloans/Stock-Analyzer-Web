@@ -5,29 +5,70 @@ import {
   REGISTER_USER_FAILED,
   REGISTER_PAYMENT,
   NEXT_STEP,
-  PREVIOUS_STEP
+  PREVIOUS_STEP,
+  PICK_PLAN,
+  OPEN_PAYMENT_MODAL,
+  CLOSE_PAYMENT_MODAL,
+  REGISTER_PAYMENT_FAILED,
+  REGISTER_DONE,
+  FETCH_USER_SUCCESS,
+  FETCH_USER_FAILED,
+  LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  DISMISS_LOGIN_ERROR
 } from "./actions";
 
 const initialState = {
-  loading: false,
   user: {},
-  token: "",
-  err: ""
+  err: "",
+  loading: false
 };
 
 const account = (state = initialState, { type, payload }) => {
   switch (type) {
-    case REGISTER_USER:
-      return { ...state, loading: payload.loading };
-
-    case REGISTER_USER_SUCCESS:
+    case LOGIN:
+      return { ...state, loading: true };
+    case LOGIN_SUCCESS:
       return { ...state, loading: false };
+    case LOGIN_FAILED:
+      return { ...state, loading: false, err: payload.err };
+    case FETCH_USER_SUCCESS:
+      return { ...state, user: payload.user };
+    case FETCH_USER_FAILED:
+      return { ...initialState, err: payload.err };
+    case DISMISS_LOGIN_ERROR:
+      return { ...state, err: "" };
+    default:
+      return state;
+  }
+};
+
+const registerInitialState = {
+  plan: null,
+  loading: false,
+  err: "",
+  token: ""
+};
+
+const registerRequest = (state = registerInitialState, { type, payload }) => {
+  switch (type) {
+    case REGISTER_USER:
+      return { ...state, loading: true };
 
     case REGISTER_USER_FAILED:
       return { ...state, err: payload.err, loading: false };
 
     case REGISTER_PAYMENT:
       return { ...state, token: payload.token };
+
+    case REGISTER_PAYMENT_FAILED:
+      return { ...state, err: payload.err };
+    case PICK_PLAN:
+      return { ...state, plan: payload.plan };
+
+    case REGISTER_DONE:
+      return registerInitialState;
     default:
       return state;
   }
@@ -41,6 +82,23 @@ const step = (state = 1, { type, payload }) => {
     case PREVIOUS_STEP:
       const prev = state > 1 && state - 1;
       return prev || state;
+    case REGISTER_DONE:
+      return 1;
+    default:
+      return state;
+  }
+};
+
+const initialModal = {
+  payment: false
+};
+
+const modal = (state = initialModal, { type, payload }) => {
+  switch (type) {
+    case OPEN_PAYMENT_MODAL:
+      return { ...state, payment: true };
+    case CLOSE_PAYMENT_MODAL:
+      return { ...state, payment: false };
     default:
       return state;
   }
@@ -48,5 +106,7 @@ const step = (state = 1, { type, payload }) => {
 
 export default combineReducers({
   account,
-  step
+  step,
+  registerRequest,
+  modal
 });

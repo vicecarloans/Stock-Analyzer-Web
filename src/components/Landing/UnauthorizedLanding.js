@@ -10,15 +10,10 @@ import { Plans } from "./Plans";
 import { WavesWrapper } from "./UnauthorizedLanding.styles";
 
 export class UnauthorizedLanding extends Component {
-  state = {
-    hash: ""
-  };
-
   componentDidMount() {
     const { hash } = window.location;
     if (hash) {
       jump(hash);
-      this.setState({ hash });
     }
   }
 

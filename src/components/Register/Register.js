@@ -15,6 +15,10 @@ import {
   Button
 } from "carbon-components-react";
 import { StepIndicatorHeader, StepIndicatorSubHeader } from "./Register.styles";
+import PickPlanComponent from "./PickPlan";
+import RegisterForm from "./RegisterForm";
+import ReviewPayment from "./ReviewPayment";
+import RegisterSuccess from "./RegisterSuccess";
 
 export class Register extends Component {
   static propTypes = {
@@ -38,9 +42,17 @@ export class Register extends Component {
   };
 
   getSteps = () =>
-    REGISTER_STEPS.map(step => (
+    REGISTER_STEPS.map((step, i) => (
       <ProgressStep key={`${step.id}-${step.label}`} label={step.label} />
     ));
+
+  renderPlanOptions = () => <PickPlanComponent />;
+
+  renderRegisterForm = () => <RegisterForm />;
+
+  renderReviewPayment = () => <ReviewPayment />;
+
+  renderRegisterSuccess = () => <RegisterSuccess />;
 
   render() {
     const { step } = this.props;
@@ -53,20 +65,10 @@ export class Register extends Component {
         <ProgressIndicator currentIndex={step}>
           {this.getSteps()}
         </ProgressIndicator>
-        <Button
-          onClick={() => {
-            this.props.goToNextStep();
-          }}
-        >
-          Next
-        </Button>
-        <Button
-          onClick={() => {
-            this.props.backToPreviousStep();
-          }}
-        >
-          Back
-        </Button>
+        {step === 0 && this.renderPlanOptions()}
+        {step === 1 && this.renderRegisterForm()}
+        {step === 2 && this.renderReviewPayment()}
+        {step === 3 && this.renderRegisterSuccess()}
       </Authentication>
     );
   }

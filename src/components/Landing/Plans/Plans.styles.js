@@ -57,5 +57,6 @@ export const Amount = styled(Text)`
 `;
 
 export const Description = styled(Text)`
+  min-height: 20%;
   font-size: 16px;
 `;

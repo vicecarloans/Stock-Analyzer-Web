@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Wrapper, Title } from "./Introduction.styles";
 import { SAButton } from "components/common";
+import { Wrapper, Title } from "./Introduction.styles";
 
 export class Introduction extends Component {
   componentDidMount() {
@@ -10,11 +10,14 @@ export class Introduction extends Component {
       this.createParticle();
     }
   }
+
   handleJoin = () => {};
+
   createParticle = () => {
     require("particles.js/particles");
     window.particlesJS.load("particle-js", "static/particles-config.json");
   };
+
   render() {
     return (
       <Wrapper id="top">
@@ -23,7 +26,7 @@ export class Introduction extends Component {
           <Title>Investment &amp; Risk Analysis Platform</Title>
           <SAButton
             onClick={this.handleJoin}
-            style={{ minWidth: 250, minHeight: 52, fontSize: 20 }}
+            style={{ minWidth: "250px", minHeight: "52px", fontSize: "20px" }}
           >
             Join free for a month
           </SAButton>
