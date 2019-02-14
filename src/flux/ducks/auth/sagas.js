@@ -56,7 +56,6 @@ export function* registerUserSaga() {
 export function* loginUserSaga() {
   try {
     const user = yield select(getFormValues("login"));
-
     const body = { usernameOrEmail: user.email, password: user.password };
 
     const res = yield call(

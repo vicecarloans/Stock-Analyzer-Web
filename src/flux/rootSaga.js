@@ -1,7 +1,7 @@
 import { all, fork } from "redux-saga/effects";
 
-import authSagaWatcher from "./ducks/auth/sagas";
+import authWatcher from "./ducks/auth/sagas";
 
 export default function* rootSaga() {
-  yield all([fork(authSagaWatcher)]);
+  yield all([fork(authWatcher)]);
 }

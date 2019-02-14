@@ -48,11 +48,9 @@ app
             headers: { "Content-Type": "application/json" }
           }
         );
-
         const session = new SessionModel({
           token: data.token
         });
-
         const result = await session.save();
         res.cookie("session_id", result._id, {
           maxAge: 3600000,
@@ -77,7 +75,6 @@ app
               }
             }
           );
-          console.log(data);
           return res.json(data);
         }
         throw new Error({ status: 401, message: "No token found" });
