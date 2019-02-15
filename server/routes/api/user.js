@@ -52,10 +52,18 @@ router.put("/", requireLogin, async (req, res, next) => {
   }
 });
 
-const CLOUDINARY_API = localEnv.CLOUDINARY_API || process.env.CLOUDINARY_API;
-const CLOUDINARY_NAME = localEnv.CLOUDINARY_NAME || process.env.CLOUDINARY_NAME;
+const CLOUDINARY_API =
+  process.env.NODE_ENV === "production"
+    ? process.env.CLOUDINARY_API
+    : localEnv.CLOUDINARY_API;
+const CLOUDINARY_NAME =
+  process.env.NODE_ENV === "production"
+    ? process.env.CLOUDINARY_NAME
+    : localEnv.CLOUDINARY_NAME;
 const CLOUDINARY_SECRET =
-  localEnv.CLOUDINARY_SECRET || process.env.CLOUDINARY_SECRET;
+  process.env.NODE_ENV === "production"
+    ? process.env.CLOUDINARY_SECRET
+    : localEnv.CLOUDINARY_SECRET;
 
 cloudinary.config({
   cloud_name: CLOUDINARY_NAME,
