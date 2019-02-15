@@ -37,6 +37,7 @@ app
       })
     );
     server.use(bodyParser.json());
+    server.use(bodyParser.urlencoded({ extended: false }));
 
     server.use("/api", require("./routes/api"));
 

@@ -3,7 +3,8 @@ import App, { Container } from "next/app";
 import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
 import createStore from "flux/createStore";
-import { fetchUserSuccess } from "flux/ducks/auth";
+import { fetchUserSuccess, fetchUserFailed } from "flux/ducks/auth";
+import { persistStore } from "redux-persist";
 import { SALayout } from "components/common";
 import {
   API_BASE_PATH,
@@ -20,7 +21,6 @@ import { Router } from "server/routes";
 import Axios from "axios";
 
 Router.events.on("routeChangeStart", url => {
-  console.log(`Loading: ${url}`);
   NProgress.start();
 });
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -58,6 +58,7 @@ class MyApp extends App {
           REQUEST_HEADERS_AUTH
         );
         pageProps.user = JSON.stringify(data);
+        ctx.store.dispatch(fetchUserSuccess(data));
         if (type === 1 || path === "/" || path.includes("/#")) {
           Router.replaceRoute("/dashboard");
         }
@@ -73,6 +74,7 @@ class MyApp extends App {
           Router.replaceRoute("/login");
         }
       }
+      ctx.store.dispatch(fetchUserFailed());
     }
 
     return { pageProps };
@@ -84,7 +86,7 @@ class MyApp extends App {
       <Container>
         <Provider store={store}>
           <PersistGate loading={null} persistor={store.__persistor}>
-            <SALayout user={pageProps.user ? JSON.parse(pageProps.user) : null}>
+            <SALayout user={pageProps.user} store={store}>
               <Component {...pageProps} />
             </SALayout>
           </PersistGate>

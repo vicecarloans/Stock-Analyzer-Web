@@ -3,15 +3,16 @@ import styled from "styled-components";
 export const StepIndicatorHeader = styled.h1`
   font-size: 24px;
   font-weight: 500;
-  color: #000;
+  color: #fff;
   margin-left: 25px;
+
   font-family: "IBM Plex Sans", sans-serif;
 `;
 
 export const StepIndicatorSubHeader = styled.h1`
   font-size: 24px;
   font-weight: bold;
-  color: #000;
+  color: #fff;
   margin-left: 25px;
   font-family: "IBM Plex Sans", sans-serif;
 `;
@@ -69,11 +70,12 @@ export const SuccessWord = styled.p`
   font-size: 22px;
   font-family: "IBM Plex Sans", sans-serif;
   font-weight: bold;
-  color: #39363b;
+  color: #fff;
   margin: 20px 0;
 `;
 
 export const SuccessWrapper = styled.div`
   text-align: center;
+
   margin-top: 40px;
 `;

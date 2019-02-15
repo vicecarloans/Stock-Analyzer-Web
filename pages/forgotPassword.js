@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { SALayout } from "components/common";
-
+import Construction from "components/common/Construction";
 export default class forgotPassword extends Component {
   render() {
-    return <div>gay</div>;
+    return <Construction />;
   }
 }

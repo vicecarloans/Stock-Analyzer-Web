@@ -1,3 +1,9 @@
-export const ANONYMOUS_ROUTES = /\/*\blogin|\/*\bregister|\/*\bforgotPassword\/\w*/g;
+export const ANONYMOUS_ROUTES = ["/", "/login", "/register", "/forgotPassword"];
 
-export const AUTHORIZED_ROUTES = /(\/dashboard|stock|news|profile|portfolio)*\/\w+/g;
+export const AUTHORIZED_ROUTES = [
+  "/dashboard",
+  "/profile",
+  "/portfolio",
+  "/news",
+  "/stocks"
+];

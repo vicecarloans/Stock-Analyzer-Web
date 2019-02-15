@@ -13,7 +13,6 @@ export default class UniversalFooter extends PureComponent {
         <CopyRight>
           &copy; 2018-2019 <SAText>Stock Analyzer</SAText>. All rights reserved.
         </CopyRight>
-        <SectionLink>Feedback</SectionLink>
       </Wrapper>
     );
   }

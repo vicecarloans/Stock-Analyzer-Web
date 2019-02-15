@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { SAButton } from "components/common";
 import { HEADERS, AUTHORIZED_HEADERS } from "constants/header";
 import { Router, Link } from "server/routes";
+import { userSelector } from "flux/ducks/auth/selectors";
+import combineSelectors from "utils/combineSelectors";
 import jump from "jump.js";
 import {
   Wrapper,
@@ -24,13 +26,12 @@ export class UniversalHeader extends Component {
   };
 
   state = {
-    instances: null
+    instances: null,
+    isReady: false
   };
   componentDidMount() {
     Router.prefetchRoute("/login");
-    console.log("did mount");
     var elems = document.querySelectorAll(".dropdown-trigger");
-    console.log(elems);
     if (elems.length > 0) {
       const instances = M.Dropdown.init(elems, {
         alignment: "right",
@@ -40,18 +41,14 @@ export class UniversalHeader extends Component {
     }
   }
 
-  static getDerivedStateFromProps(props, state) {
-    let newState = {};
+  componentDidUpdate(prevProps, prevState) {
     var elems = document.querySelectorAll(".dropdown-trigger");
-    console.log(elems);
-    if (M.Dropdown && elems.length > 0 && !state.instances) {
-      const instances = M.Dropdown.init(elems, {
+    if (M.Dropdown && elems.length > 0) {
+      M.Dropdown.init(elems, {
         alignment: "right",
         coverTrigger: false
       });
-      newState = { ...newState, instances };
     }
-    return newState;
   }
 
   handleSignup = () => {
@@ -78,7 +75,6 @@ export class UniversalHeader extends Component {
 
   getRight = () => {
     const { user } = this.props;
-    console.log("rendered");
     if (user) {
       return (
         <HeaderRight>
@@ -94,7 +90,7 @@ export class UniversalHeader extends Component {
           />
           <ul id="dropdown1" className="dropdown-content">
             <li>
-              <Link prefetch route="/profile">
+              <Link route="/profile">
                 <a>My Profile</a>
               </Link>
             </li>
@@ -136,7 +132,9 @@ export class UniversalHeader extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = combineSelectors({
+  user: userSelector
+});
 
 const mapDispatchToProps = {};
 

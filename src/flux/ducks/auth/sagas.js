@@ -6,10 +6,12 @@ import {
   USER_PROFILE_ENDPOINT,
   REQUEST_HEADERS_AUTH,
   REQUEST_HEADERS_AUTH_MANUAL_COOKIE,
+  USER_EDIT_PICTURE_ENDPOINT,
+  USER_EDIT_ENDPOINT,
   USER_LOGIN_ENDPOINT
 } from "constants/api";
 import Axios from "axios";
-import { getFormValues, destroy } from "redux-form";
+import { getFormValues, destroy, reset } from "redux-form";
 import {
   REGISTER_USER,
   registerUserFailed,
@@ -20,7 +22,14 @@ import {
   fetchUserSuccess,
   LOGIN,
   loginFailed,
-  loginSuccess
+  loginSuccess,
+  UPLOAD_IMAGE_URL,
+  uploadImageUrlFailed,
+  uploadImageUrlSuccess,
+  UPDATE_USER_DATA,
+  updateUserDataFailed,
+  updateUserDataSuccess,
+  fetchUser
 } from "./actions";
 import { tokenSelector, planSelector } from "./selectors";
 import { Router } from "server/routes";
@@ -74,16 +83,53 @@ export function* loginUserSaga() {
   }
 }
 
-export function* fetchUserSaga({ payload: { cookie } }) {
+export function* fetchUserSaga() {
   try {
-    const res = yield call(
+    const { data } = yield call(
       Axios.get,
-      `${API_BASE_PATH}${USER_PROFILE_ENDPOINT}`,
-      cookie ? REQUEST_HEADERS_AUTH_MANUAL_COOKIE(cookie) : REQUEST_HEADERS_AUTH
+      `${USER_PROFILE_ENDPOINT}`,
+      REQUEST_HEADERS_AUTH
     );
-    yield put(fetchUserSuccess(res));
+    yield put(fetchUserSuccess(data));
   } catch (err) {
     yield put(fetchUserFailed());
+  }
+}
+
+export function* uploadImageSaga({ payload }) {
+  try {
+    const { url } = payload;
+    let formData = new FormData();
+    formData.append("picture", url);
+    const {
+      data: { data, picture }
+    } = yield call(Axios.put, `${USER_EDIT_PICTURE_ENDPOINT}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+      withCredentials: true
+    });
+    yield put(uploadImageUrlSuccess(picture));
+  } catch (err) {
+    yield put(uploadImageUrlFailed(err));
+  }
+}
+
+export function* updateUserSaga() {
+  try {
+    const { name, title, address } = yield select(getFormValues("profile"));
+    const body = { name, title, address };
+
+    yield call(
+      Axios.put,
+      USER_EDIT_ENDPOINT,
+      JSON.stringify(body),
+      REQUEST_HEADERS_AUTH
+    );
+
+    yield put(fetchUser());
+    yield put(updateUserDataSuccess());
+    yield put(destroy("profile"));
+  } catch (err) {
+    yield put(updateUserDataFailed(err.message));
   }
 }
 
@@ -91,4 +137,6 @@ export default function* authSagaWatcher() {
   yield takeLatest(REGISTER_USER, registerUserSaga);
   yield takeLatest(FETCH_USER, fetchUserSaga);
   yield takeLatest(LOGIN, loginUserSaga);
+  yield takeLatest(UPLOAD_IMAGE_URL, uploadImageSaga);
+  yield takeLatest(UPDATE_USER_DATA, updateUserSaga);
 }

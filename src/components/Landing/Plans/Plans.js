@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { SAButton } from "components/common";
+import { Router } from "server/routes";
 import { PLANS } from "constants/landing/plans";
 import { PlansWrapper, Title, SubTitle } from "./Plans.styles";
 import PlanType from "./PlanType";
@@ -26,8 +27,14 @@ export class Plans extends Component {
         <Title>Service Plans</Title>
         <SubTitle>Our services come with different offers</SubTitle>
         <SAButton
-          onClick={() => {}}
-          style={{ minWidth: "200px", minHeight: "52px", fontSize: "16px" }}
+          onClick={() => {
+            Router.pushRoute("/register");
+          }}
+          style={{
+            minWidth: "200px",
+            minHeight: "52px",
+            fontSize: "16px"
+          }}
         >
           Join free for a month
         </SAButton>

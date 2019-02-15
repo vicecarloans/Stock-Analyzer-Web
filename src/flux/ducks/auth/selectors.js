@@ -4,17 +4,17 @@ export const authSelector = state => state.auth;
 
 export const userSelector = createSelector(
   authSelector,
-  authState => authState.account.user
+  authState => authState.account && authState.account.user
 );
 
 export const loginLoadingSelector = createSelector(
   authSelector,
-  authState => authState.account.loading
+  authState => authState.account && authState.account.loading
 );
 
 export const loginErrorSelector = createSelector(
   authSelector,
-  authState => authState.account.err
+  authState => authState.account && authState.account.err
 );
 
 export const tokenSelector = createSelector(
@@ -45,4 +45,9 @@ export const planSelector = createSelector(
 export const paymentModalSelector = createSelector(
   authSelector,
   authState => authState.modal.payment
+);
+
+export const notificationSelector = createSelector(
+  authSelector,
+  authState => authState.account.success
 );

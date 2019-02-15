@@ -44,14 +44,6 @@ body {
 .sa--form {
   width: 100%;
 }
-.bx--label {
-  color: #282a2c;
-  cursor: pointer;
-
-  & ~ .bx--text-input {
-    color: #fff;
-  }
-}
 
 .bx--text-input {
   width: 100%;
@@ -61,7 +53,6 @@ body {
     background-color: #2c2c30;
   }
 }
-
 .bx--progress {
   width: calc(35% + 10rem);
 }
@@ -175,4 +166,13 @@ body {
 
 .dropdown-trigger {
   cursor: pointer;
+}
+
+.bx--label {
+  color: #fff;
+  cursor: pointer;
+
+  & + .bx--text-input {
+    color: #fff;
+  }
 }

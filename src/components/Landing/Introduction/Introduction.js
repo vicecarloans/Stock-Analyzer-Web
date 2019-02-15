@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { SAButton } from "components/common";
+import { Router } from "server/routes";
 import { Wrapper, Title } from "./Introduction.styles";
 
 export class Introduction extends Component {
@@ -11,7 +12,9 @@ export class Introduction extends Component {
     }
   }
 
-  handleJoin = () => {};
+  handleJoin = () => {
+    Router.pushRoute("/register");
+  };
 
   createParticle = () => {
     require("particles.js/particles");
@@ -26,7 +29,11 @@ export class Introduction extends Component {
           <Title>Investment &amp; Risk Analysis Platform</Title>
           <SAButton
             onClick={this.handleJoin}
-            style={{ minWidth: "250px", minHeight: "52px", fontSize: "20px" }}
+            style={{
+              minWidth: "250px",
+              minHeight: "52px",
+              fontSize: "20px"
+            }}
           >
             Join free for a month
           </SAButton>
@@ -34,7 +41,11 @@ export class Introduction extends Component {
 
         <div
           id="particle-js"
-          style={{ position: "absolute", zIndex: 0, minWidth: "100%" }}
+          style={{
+            position: "absolute",
+            zIndex: 0,
+            minWidth: "100%"
+          }}
         />
       </Wrapper>
     );

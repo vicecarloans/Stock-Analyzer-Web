@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { SALayout } from "components/common";
+import Construction from "components/common/Construction";
 
 export default class dashboard extends Component {
   render() {
-    return <div>Gay!</div>;
+    return <Construction />;
   }
 }

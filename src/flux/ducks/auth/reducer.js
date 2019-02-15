@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import {
   REGISTER_USER,
   REGISTER_USER_SUCCESS,
+  FETCH_USER,
   REGISTER_USER_FAILED,
   REGISTER_PAYMENT,
   NEXT_STEP,
@@ -16,13 +17,22 @@ import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_FAILED,
-  DISMISS_LOGIN_ERROR
+  DISMISS_LOGIN_ERROR,
+  SIGN_OUT,
+  UPLOAD_IMAGE_URL,
+  UPLOAD_IMAGE_URL_SUCCESS,
+  UPLOAD_IMAGE_URL_FAILED,
+  UPDATE_USER_DATA,
+  UPDATE_USER_DATA_SUCCESS,
+  UPDATE_USER_DATA_FAILED,
+  DISMISS_UPDATE_NOTIFICATION
 } from "./actions";
 
 const initialState = {
-  user: {},
+  user: null,
   err: "",
-  loading: false
+  loading: false,
+  success: false
 };
 
 const account = (state = initialState, { type, payload }) => {
@@ -33,12 +43,40 @@ const account = (state = initialState, { type, payload }) => {
       return { ...state, loading: false };
     case LOGIN_FAILED:
       return { ...state, loading: false, err: payload.err };
+    case FETCH_USER:
+      return { ...state, loading: true };
     case FETCH_USER_SUCCESS:
-      return { ...state, user: payload.user };
+      return { ...state, user: payload.user, loading: false };
     case FETCH_USER_FAILED:
-      return { ...initialState, err: payload.err };
+      return {
+        ...initialState,
+        err: payload.err,
+        loading: false,
+        user: null
+      };
     case DISMISS_LOGIN_ERROR:
       return { ...state, err: "" };
+    case UPLOAD_IMAGE_URL:
+      return { ...state, loading: true };
+    case UPLOAD_IMAGE_URL_SUCCESS:
+      return {
+        ...state,
+        user: { ...state.user, picture: payload.picture },
+        loading: false
+      };
+    case UPLOAD_IMAGE_URL_FAILED:
+      return { ...state, err: payload.err, loading: false };
+    case UPDATE_USER_DATA:
+      return { ...state, loading: true };
+    case UPDATE_USER_DATA_SUCCESS:
+      return { ...state, success: true, loading: false };
+    case UPDATE_USER_DATA_FAILED:
+      return { ...state, loading: false, err: payload.err };
+    case SIGN_OUT:
+      return initialState;
+    case DISMISS_UPDATE_NOTIFICATION:
+      return { ...state, success: false };
+
     default:
       return state;
   }

@@ -21,6 +21,10 @@ export default class MyCustomDocument extends Document {
             type="text/css"
             href="/static/css/nprogress.css"
           />
+          <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+          />
           <script id="stripe-js" src="https://js.stripe.com/v3/" async />
         </Head>
         <body>
