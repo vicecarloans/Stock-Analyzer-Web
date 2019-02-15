@@ -31,13 +31,11 @@ export class UniversalHeader extends Component {
   componentDidMount() {
     Router.prefetchRoute("/login");
     var elems = document.querySelectorAll(".dropdown-trigger");
-    if (elems.length > 0) {
-      if (M && M.Dropdown) {
-        M.Dropdown.init(elems, {
-          alignment: "right",
-          coverTrigger: false
-        });
-      }
+    if (M && M.Dropdown && elems.length > 0) {
+      M.Dropdown.init(elems, {
+        alignment: "right",
+        coverTrigger: false
+      });
     }
   }
 
