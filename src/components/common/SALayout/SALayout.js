@@ -1,8 +1,16 @@
 import React, { PureComponent } from "react";
 import { UniversalHeader, UniversalFooter } from "components/common";
+import PropTypes from "prop-types";
 import { DarkBackground, ContentWrapper } from "./SALayout.styles";
 
 export default class SALayout extends PureComponent {
+  static propTypes = {
+    user: PropTypes.shape({})
+  };
+
+  static defaultProps = {
+    user: null
+  };
   componentDidMount() {
     if (window) {
       const WOW = require("static/js/wow.min.js");
@@ -17,7 +25,7 @@ export default class SALayout extends PureComponent {
   render() {
     return (
       <DarkBackground>
-        <UniversalHeader />
+        <UniversalHeader user={this.props.user} />
         <ContentWrapper>{this.props.children}</ContentWrapper>
         <UniversalFooter />
       </DarkBackground>

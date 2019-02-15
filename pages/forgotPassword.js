@@ -3,6 +3,6 @@ import { SALayout } from "components/common";
 
 export default class forgotPassword extends Component {
   render() {
-    return <SALayout />;
+    return <div>gay</div>;
   }
 }

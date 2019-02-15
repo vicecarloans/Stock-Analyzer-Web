@@ -38,50 +38,7 @@ app
     );
     server.use(bodyParser.json());
 
-    server.post("/api/auth/signin", async (req, res, next) => {
-      try {
-        const body = { ...req.body };
-        const { data } = await axios.post(
-          "https://stock-analyzer-api.herokuapp.com/api/auth/signin",
-          JSON.stringify(body),
-          {
-            headers: { "Content-Type": "application/json" }
-          }
-        );
-        const session = new SessionModel({
-          token: data.token
-        });
-        const result = await session.save();
-        res.cookie("session_id", result._id, {
-          maxAge: 3600000,
-          httpOnly: true
-        });
-
-        return res.json({ status: 1, message: "User signed in successfully" });
-      } catch (err) {
-        next(new Error({ status: 400, message: "Wrong email/password" }));
-      }
-    });
-
-    server.get("/api/user", requireLogin, async (req, res) => {
-      try {
-        if (req.token) {
-          const { data } = await axios.get(
-            "https://stock-analyzer-api.herokuapp.com/api/user",
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + req.token
-              }
-            }
-          );
-          return res.json(data);
-        }
-        throw new Error({ status: 401, message: "No token found" });
-      } catch (err) {
-        throw new Error({ status: err.status, message: err.message });
-      }
-    });
+    server.use("/api", require("./routes/api"));
 
     server.use(handler);
 

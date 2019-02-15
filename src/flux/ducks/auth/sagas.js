@@ -23,6 +23,7 @@ import {
   loginSuccess
 } from "./actions";
 import { tokenSelector, planSelector } from "./selectors";
+import { Router } from "server/routes";
 
 export function* registerUserSaga() {
   try {
@@ -66,6 +67,8 @@ export function* loginUserSaga() {
     );
 
     yield put(loginSuccess(res));
+
+    Router.replaceRoute("/dashboard");
   } catch (err) {
     yield put(loginFailed(err));
   }

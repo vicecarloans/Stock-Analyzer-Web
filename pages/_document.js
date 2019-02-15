@@ -26,6 +26,7 @@ export default class MyCustomDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script type="text/javascript" src="/static/js/materialize.min.js" />
         </body>
       </html>
     );

@@ -9,11 +9,7 @@ import { UnauthorizedLanding } from "components/Landing";
 
 class Home extends Component {
   render() {
-    return (
-      <SALayout>
-        <UnauthorizedLanding />
-      </SALayout>
-    );
+    return <UnauthorizedLanding />;
   }
 }
 

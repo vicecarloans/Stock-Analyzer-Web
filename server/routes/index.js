@@ -6,4 +6,8 @@ const routes = require("next-routes");
 module.exports = routes()
   .add("login")
   .add("register")
-  .add("forgotPassword");
+  .add("forgotPassword")
+  .add("dashboard")
+  .add("news")
+  .add("portfolio")
+  .add("profile");

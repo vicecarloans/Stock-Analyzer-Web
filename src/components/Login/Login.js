@@ -64,7 +64,11 @@ export class Login extends Component {
             label="Password"
           />
         </form>
-        <SAButton style={{ margin: "40px 0px" }} onClick={this.handleLogin}>
+        <SAButton
+          disabled={this.props.loading}
+          style={{ margin: "40px 0px" }}
+          onClick={this.handleLogin}
+        >
           {this.props.loading ? (
             <InlineLoading description="Logging In..." />
           ) : (
