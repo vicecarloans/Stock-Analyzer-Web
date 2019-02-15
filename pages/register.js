@@ -4,10 +4,6 @@ import { Register as RegisterComponent } from "components/Register";
 
 export default class Register extends Component {
   render() {
-    return (
-      <SALayout>
-        <RegisterComponent />
-      </SALayout>
-    );
+    return <RegisterComponent />;
   }
 }

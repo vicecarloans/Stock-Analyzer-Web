@@ -34,7 +34,7 @@ export default class AboutUs extends PureComponent {
       <AboutWrapper id="team">
         <Title className="wow fadeInUp animated">About Us</Title>
         <div className="bx--grid container">
-          <div className="bx--row">{this.renderTeam()}</div>
+          <div className="bx--row semi-container">{this.renderTeam()}</div>
         </div>
       </AboutWrapper>
     );

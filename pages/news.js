@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Construction from "components/common/Construction";
-export default class forgotPassword extends Component {
+
+export default class news extends Component {
   render() {
     return <Construction />;
   }

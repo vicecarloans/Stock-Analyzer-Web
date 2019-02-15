@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const RegisterWithUs = styled.p`
   font-size: 16px;
   font-weight: bold;
-  color: #000;
+  color: #fff;
   margin-top: 20px;
   font-family: "IBM Plex Sans", sans-serif;
 `;

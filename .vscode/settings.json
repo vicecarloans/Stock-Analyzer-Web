@@ -1,17 +1,7 @@
 {
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "window.zoomLevel": 0,
-  "python.jediEnabled": false,
-  // formatting using eslint
-  // let editor format using prettier for all other files
   "editor.formatOnSave": true,
-  // disable editor formatting, so eslint can handle it
-  "[javascript]": {
-    "editor.formatOnSave": false
-  },
-  // available through eslint plugin in vscode
+  "editor.formatOnType": true,
   "eslint.autoFixOnSave": true,
-  "eslint.alwaysShowStatus": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "editor.formatOnPaste": true
+  "eslint.enable": true,
+  "prettier.singleQuote": true
 }

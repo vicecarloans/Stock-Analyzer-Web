@@ -1,51 +1,36 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "commonjs": true
-  },
+	"env": {
+		"browser": true,
+		"es6": true,
+		"commonjs": true
+	},
 
-  "extends": ["eslint:recommended"],
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true,
-      "arrowFunctions": true
-    },
-    "sourceType": "module"
-  },
-  "settings": {
-    "import/resolver": {
-      "babel-module": {}
-    }
-  },
-  "plugins": ["react"],
-  "rules": {
-    "react/jsx-uses-vars": [2],
-    "no-console": "warn",
-    "no-unused-expressions": "off",
-    "class-methods-use-this": "off",
-    "react/destructuring-assignment": "off",
-    "react/prop-types": "warn",
-    "prefer-destructuring": "warn",
-    "import/no-cycle": "warn",
-    "react/prefer-stateless-function": "off",
-    "no-use-before-define": "off",
-    "global-require": "off",
-    "no-unused-vars": "warn",
-    "react/jsx-no-bind": "warn",
-    "no-underscore-dangle": "off",
-    "no-fallthrough": "off",
-    "no-case-declarations": "off",
-    "import/no-dynamic-require": "off",
-    "no-restricted-globals": "warn",
-    "import/no-extraneous-dependencies": "warn",
-    "react/jsx-filename-extension": "off",
-    "import/prefer-default-export": "off",
-    "jsx-a11y/anchor-is-valid": "off",
-    "no-useless-escape": "off",
-    "react/no-unused-state": "off",
-    "no-undef": "off"
-  }
+	"extends": ["prettier", "prettier/react"],
+	"parser": "babel-eslint",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"experimentalObjectRestSpread": true,
+			"jsx": true,
+			"arrowFunctions": true
+		},
+		"sourceType": "module"
+	},
+	"settings": {
+		"import/resolver": {
+			"babel-module": {}
+		}
+	},
+	"plugins": ["prettier"],
+	"rules": {
+		"react/jsx-filename-extension": [
+			1,
+			{
+				"extensions": [".js", ".jsx"]
+			}
+		],
+		"react/prop-types": 0,
+		"no-underscore-dangle": 0,
+		"import/imports-first": ["error", "absolute-first"],
+		"import/newline-after-import": "error"
+	}
 }

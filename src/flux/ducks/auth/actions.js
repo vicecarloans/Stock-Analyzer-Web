@@ -121,3 +121,63 @@ export const DISMISS_LOGIN_ERROR = "@AUTH/DISMISS_LOGIN_ERROR";
 export const dismissLoginError = () => ({
   type: DISMISS_LOGIN_ERROR
 });
+
+export const SIGN_OUT = "@AUTH/SIGN_OUT";
+
+export const signOut = () => ({
+  type: SIGN_OUT
+});
+
+export const UPLOAD_IMAGE_URL = "@AUTH/UPLOAD_IMAGE_URL";
+
+export const uploadImageUrl = url => ({
+  type: UPLOAD_IMAGE_URL,
+  payload: {
+    url
+  }
+});
+
+export const UPLOAD_IMAGE_URL_SUCCESS = "UPLOAD_IMAGE_URL_SUCCESS";
+
+export const uploadImageUrlSuccess = picture => ({
+  type: UPLOAD_IMAGE_URL_SUCCESS,
+  payload: {
+    picture
+  }
+});
+
+export const UPLOAD_IMAGE_URL_FAILED = "UPLOAD_IMAGE_URL_FAILED";
+
+export const uploadImageUrlFailed = err => ({
+  type: UPLOAD_IMAGE_URL_FAILED,
+  payload: {
+    err
+  }
+});
+
+export const UPDATE_USER_DATA = "UPDATE_USER_DATA";
+
+export const updateUserData = () => ({
+  type: UPDATE_USER_DATA
+});
+
+export const UPDATE_USER_DATA_SUCCESS = "UPDATE_USER_DATA_SUCCESS";
+
+export const updateUserDataSuccess = () => ({
+  type: UPDATE_USER_DATA_SUCCESS
+});
+
+export const UPDATE_USER_DATA_FAILED = "UPDATE_USER_DATA_FAILED";
+
+export const updateUserDataFailed = err => ({
+  type: UPDATE_USER_DATA_FAILED,
+  payload: {
+    err
+  }
+});
+
+export const DISMISS_UPDATE_NOTIFICATION = "DISMISS_UPDATE_NOTIFICATION";
+
+export const dismissUpdateNotification = () => ({
+  type: DISMISS_UPDATE_NOTIFICATION
+});

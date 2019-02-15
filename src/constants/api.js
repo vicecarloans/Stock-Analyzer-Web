@@ -8,6 +8,8 @@ export const USER_PROFILE_ENDPOINT = "/api/user";
 
 export const USER_EDIT_ENDPOINT = "/api/user";
 
+export const USER_EDIT_PICTURE_ENDPOINT = "/api/user/picture";
+
 export const getCheckEmailEndpoint = email =>
   `/api/user/checkEmailAvailability/${email}`;
 

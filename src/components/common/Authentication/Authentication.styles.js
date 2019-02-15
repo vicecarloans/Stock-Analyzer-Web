@@ -11,8 +11,8 @@ export const AuthWrapper = styled.div`
     min-width: 70vw;
     min-height: 70vh;
     border-radius: 40px;
-    background-color: #CBC5C5;
-    border: 1px solid #707070;
+    background-color: #0C0C14;
+    border: 1px solid rgba(255, 255, 255, 255, 0.4);
     ${media.phone`
         min-height: 20vh;
     `}
@@ -50,7 +50,7 @@ export const BodyWrapper = styled.div`
 
 export const Header = styled.h1`
   font-size: 32px;
-  color: #000;
+  color: #fff;
   font-weight: bold;
   font-family: "IBM Plex Sans", sans-serif;
 `;

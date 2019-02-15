@@ -20,3 +20,14 @@ export const HEADERS = [
     hash: "#plan"
   }
 ];
+
+export const AUTHORIZED_HEADERS = [
+  {
+    title: "Dashboard",
+    href: "/dashboard"
+  },
+  {
+    title: "News",
+    href: "/news"
+  }
+];

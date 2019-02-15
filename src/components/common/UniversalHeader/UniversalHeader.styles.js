@@ -26,7 +26,7 @@ export const HeaderLeft = styled.div`
 export const HeaderRight = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   min-width: 40vw;
 `;
@@ -46,4 +46,15 @@ export const SectionLink = styled.a`
   &:hover {
     color: #bad4ff;
   }
+`;
+
+export const ProfileIcon = styled.div`
+  width: 72.5px;
+  height: 72.5px;
+  border-radius: 50%;
+  background-image: url(${props =>
+    props.picture || "/static/images/default_user.png"});
+  background-size: cover;
+  background-color: #013280;
+  background-position: center;
 `;

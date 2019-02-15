@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
+const { parsed: localEnv } = require("dotenv").config();
 
+const MONGODB_URI = localEnv.MONGODB_URI || process.env.MONGODB_URI;
 module.exports = () => {
   require("./sessions");
-  mongoose.connect(
-    "mongodb://huydam:secret123@ds135305.mlab.com:35305/stock-analyzer-web"
-  );
+  mongoose.connect(MONGODB_URI);
   mongoose.connection.on("error", error => console.log(error));
 };

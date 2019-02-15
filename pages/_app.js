@@ -3,6 +3,9 @@ import App, { Container } from "next/app";
 import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
 import createStore from "flux/createStore";
+import { fetchUserSuccess, fetchUserFailed } from "flux/ducks/auth";
+import { persistStore } from "redux-persist";
+import { SALayout } from "components/common";
 import {
   API_BASE_PATH,
   USER_PROFILE_ENDPOINT,
@@ -18,7 +21,6 @@ import { Router } from "server/routes";
 import Axios from "axios";
 
 Router.events.on("routeChangeStart", url => {
-  console.log(`Loading: ${url}`);
   NProgress.start();
 });
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -30,7 +32,9 @@ class MyApp extends App {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
     }
+
     const { req, res, isServer, asPath } = ctx;
+
     const path = req ? req.originalUrl : asPath;
     const type = pathType(path);
     try {
@@ -42,7 +46,6 @@ class MyApp extends App {
           REQUEST_HEADERS_AUTH_MANUAL_COOKIE(cookie)
         );
         pageProps.user = JSON.stringify(data);
-
         if (type === 1 || path === "/") {
           res.writeHead(302, {
             Location: "/dashboard"
@@ -54,9 +57,8 @@ class MyApp extends App {
           `${USER_PROFILE_ENDPOINT}`,
           REQUEST_HEADERS_AUTH
         );
-
         pageProps.user = JSON.stringify(data);
-
+        ctx.store.dispatch(fetchUserSuccess(data));
         if (type === 1 || path === "/" || path.includes("/#")) {
           Router.replaceRoute("/dashboard");
         }
@@ -72,6 +74,7 @@ class MyApp extends App {
           Router.replaceRoute("/login");
         }
       }
+      ctx.store.dispatch(fetchUserFailed());
     }
 
     return { pageProps };
@@ -79,12 +82,13 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, store } = this.props;
-
     return (
       <Container>
         <Provider store={store}>
           <PersistGate loading={null} persistor={store.__persistor}>
-            <Component {...pageProps} />
+            <SALayout user={pageProps.user} store={store}>
+              <Component {...pageProps} />
+            </SALayout>
           </PersistGate>
         </Provider>
       </Container>

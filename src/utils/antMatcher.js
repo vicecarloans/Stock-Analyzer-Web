@@ -10,14 +10,19 @@ export const pathType = path => {
    * 404 path will be neutral
    */
 
-  const anonymousPaths = ANONYMOUS_ROUTES.test(path);
+  const anonymousPaths = ANONYMOUS_ROUTES.findIndex(route =>
+    route.includes(path)
+  );
 
-  const authorizedPaths = AUTHORIZED_ROUTES.test(path);
+  const authorizedPaths = AUTHORIZED_ROUTES.findIndex(route =>
+    route.includes(path)
+  );
 
-  if (anonymousPaths) {
+  if (anonymousPaths !== -1) {
     return 1;
   }
-  if (authorizedPaths) {
+
+  if (authorizedPaths !== -1) {
     return 3;
   }
 
