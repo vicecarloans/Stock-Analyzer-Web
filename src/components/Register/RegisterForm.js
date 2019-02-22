@@ -1,12 +1,16 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import { reduxForm, Field, getFormMeta, isInvalid } from "redux-form";
+import { reduxForm, Field, getFormMeta, isInvalid, submit } from "redux-form";
 import { registerValidate, registerValidateAsync } from "utils/validation";
 import { SAButton } from "components/common";
 import { connect } from "react-redux";
 import { TextInput, InlineLoading } from "carbon-components-react";
 import { goToNextStep, backToPreviousStep } from "flux/ducks/auth";
 import { NavigationButtonWrapper } from "./Register.styles";
+
+const onSubmit = (values, dispatch) => {
+  dispatch(goToNextStep());
+};
 
 class RegisterForm extends PureComponent {
   static propTypes = {
@@ -34,9 +38,13 @@ class RegisterForm extends PureComponent {
     />
   );
 
+  handleClick = () => {
+    this.props.submit("register");
+  };
+
   render() {
     return (
-      <form className="sa--form">
+      <form className="sa--form" onSubmit={this.props.handleSubmit}>
         <Field
           component={this.renderField}
           name="name"
@@ -76,7 +84,7 @@ class RegisterForm extends PureComponent {
             </SAButton>
             <SAButton
               style={{ minWidth: "100px", maxWidth: "150px" }}
-              onClick={this.props.goToNextStep}
+              onClick={this.handleClick}
               disabled={this.props.isInvalid || !!this.props.isValidatingAsync}
               className="bx--col-sm-6"
             >
@@ -103,7 +111,8 @@ const MapStateToProps = state => ({
 
 const MapDispatchToProps = {
   goToNextStep,
-  backToPreviousStep
+  backToPreviousStep,
+  submit
 };
 
 const RegisterReduxForm = reduxForm({
@@ -111,7 +120,8 @@ const RegisterReduxForm = reduxForm({
   validate: registerValidate,
   asyncValidate: registerValidateAsync,
   destroyOnUnmount: false,
-  asyncChangeFields: ["email"]
+  asyncChangeFields: ["email"],
+  onSubmit
 })(RegisterForm);
 
 export default connect(

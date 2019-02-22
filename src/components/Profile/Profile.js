@@ -41,6 +41,13 @@ class Profile extends Component {
     pristine: true
   };
 
+  componentDidMount() {
+    // window.addEventListener('resize', e => {
+    // 	console.log(this.profileRef.clientHeight);
+    // 	// console.log(this.profileRef.current.clientHeight);
+    // });
+  }
+
   handleImageUpload = ev => {
     if (ev.target.files && ev.target.files[0]) {
       this.props.uploadImageUrl(ev.target.files[0]);
@@ -55,7 +62,7 @@ class Profile extends Component {
   render() {
     return (
       <MainWrapper>
-        <ProfileWrapper>
+        <ProfileWrapper innerRef={ref => (this.profileRef = ref)}>
           <BlurBackground picture={this.props.user.picture}>
             <Overlay />
           </BlurBackground>
