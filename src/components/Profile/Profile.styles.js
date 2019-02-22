@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
 export const MainWrapper = styled.div`
-  min-height: 85vh;
-  height: 110vh;
-  max-height: 120vh;
+  min-height: 100vh;
   width: 100%;
 `;
 
@@ -11,15 +9,18 @@ export const ProfileWrapper = styled.div`
   height: 100%;
   width: 60%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   background-color: #0c0c14;
   border-radius: 10px;
   box-shadow: 0 3px 6 rgba(163, 163, 163, 0.16);
 `;
 
 export const BlurBackground = styled.div`
-  height: 35%;
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
+  height: 350px;
+  width: 100%;
+  filter: blur(15px);
+  -webkit-filter: blur(15px);
   border-radius: 10px 10px 0 0;
   background-image: url(${props => props.picture});
   background: ${props =>
@@ -33,10 +34,10 @@ export const Overlay = styled.div`
   position: absolute;
   z-index: 10;
   border-radius: 10px 10px 0 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   top: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 `;
 export const Preview = styled.div`
   background-image: url(${props =>
@@ -51,7 +52,7 @@ export const Preview = styled.div`
 
 export const ModeWrapper = styled.div`
   width: 100%;
-  padding: 0 40px;
+  padding: 40px;
   margin-top: 70px;
 `;
 export const GenericText = styled.p`

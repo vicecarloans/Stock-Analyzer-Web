@@ -25,12 +25,15 @@ export default class MyCustomDocument extends Document {
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             rel="stylesheet"
           />
-          <script id="stripe-js" src="https://js.stripe.com/v3/" async />
+          <script id="stripe-js" src="https://js.stripe.com/v3/" />
+          <script
+            type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"
+          />
         </Head>
         <body>
           <Main />
           <NextScript />
-          <script type="text/javascript" src="/static/js/materialize.min.js" />
         </body>
       </html>
     );

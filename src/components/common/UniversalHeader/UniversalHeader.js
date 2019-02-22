@@ -26,24 +26,22 @@ export class UniversalHeader extends Component {
   };
 
   state = {
-    instances: null,
     isReady: false
   };
   componentDidMount() {
     Router.prefetchRoute("/login");
     var elems = document.querySelectorAll(".dropdown-trigger");
-    if (elems.length > 0) {
-      const instances = M.Dropdown.init(elems, {
+    if (M && M.Dropdown && elems.length > 0) {
+      M.Dropdown.init(elems, {
         alignment: "right",
         coverTrigger: false
       });
-      this.setState({ instances });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     var elems = document.querySelectorAll(".dropdown-trigger");
-    if (M.Dropdown && elems.length > 0) {
+    if (M && M.Dropdown && elems.length > 0) {
       M.Dropdown.init(elems, {
         alignment: "right",
         coverTrigger: false
