@@ -1,8 +1,7 @@
-import React, { Component } from "react";
-import Construction from "components/common/Construction";
-
-export default class portfolio extends Component {
+import React, { PureComponent } from "react";
+import { Portfolio as PortfolioComponent } from "components/Portfolio";
+export default class portfolio extends PureComponent {
   render() {
-    return <Construction />;
+    return <PortfolioComponent />;
   }
 }

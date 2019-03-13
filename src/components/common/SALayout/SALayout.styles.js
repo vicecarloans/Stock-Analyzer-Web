@@ -7,4 +7,5 @@ export const DarkBackground = styled.div`
 
 export const ContentWrapper = styled.div`
   position: relative;
+  min-height: 80vh;
 `;

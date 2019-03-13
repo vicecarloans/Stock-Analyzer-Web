@@ -2,8 +2,18 @@
 
 @import "../node_modules/carbon-components/scss/globals/scss/styles.scss";
 
+html,
+body {
+  height: 100%;
+}
 body {
   overflow-x: hidden;
+  font-family: "IBM Plex Sans" sans-serif;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .bx--grid {
@@ -175,4 +185,52 @@ body {
   & + .bx--text-input {
     color: #fff;
   }
+}
+
+.bx--tabs__nav {
+  background-color: #141414;
+  border-bottom: 1px solid #333333;
+  margin: 0;
+}
+
+.sa--tab {
+  width: 50%;
+  text-align: center;
+}
+
+.bx--responsive-table {
+  min-width: 300px;
+}
+.react-stockchart {
+  left: 0;
+}
+
+.bx--list-box__menu {
+  background-color: #000;
+}
+
+.bx--modal-footer {
+  .bx--btn {
+    color: #fff;
+  }
+}
+
+#sa--add-combo-box {
+  background-color: #2c2c2c;
+  box-shadow: none;
+}
+
+.sa--add-stock {
+  max-height: 51px;
+  height: 51px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.bx--list-box__selection {
+  height: 51px;
+}
+.sa--combo-box-wrapper {
+  width: 60%;
+  margin: 0 auto;
 }

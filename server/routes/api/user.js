@@ -4,6 +4,7 @@ const axios = require("axios");
 const multer = require("multer");
 const cloudinary = require("cloudinary");
 const cloudinaryStorage = require("multer-storage-cloudinary");
+const resourceConstants = require("../../constants/resource");
 const { parsed: localEnv } = require("dotenv").config();
 const requireLogin = require("../../middlewares/requireLogin");
 
@@ -11,7 +12,7 @@ router.get("/", requireLogin, async (req, res, next) => {
   try {
     if (req.token) {
       const { data } = await axios.get(
-        "https://stock-analyzer-api.herokuapp.com/api/user",
+        `${resourceConstants.RESOURCE_SERVER_URI}/api/user`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -32,7 +33,7 @@ router.put("/", requireLogin, async (req, res, next) => {
     if (req.token) {
       const { name, title, address } = req.body;
       const { data } = await axios.put(
-        "https://stock-analyzer-api.herokuapp.com/api/user",
+        `${resourceConstants.RESOURCE_SERVER_URI}/api/user`,
         JSON.stringify({
           name,
           title,
@@ -89,7 +90,7 @@ router.put("/picture", requireLogin, uploading, async (req, res, next) => {
       }
       const body = { picture };
       const { data } = await axios.put(
-        "https://stock-analyzer-api.herokuapp.com/api/user/picture",
+        `${resourceConstants.RESOURCE_SERVER_URI}/api/user/picture`,
         JSON.stringify(body),
         {
           headers: {

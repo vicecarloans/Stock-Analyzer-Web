@@ -44,3 +44,37 @@ export const registerValidateAsync = async values => {
     }
   }
 };
+
+function isValidDate(dateString) {
+  //Date should be in YYYY-MM-DD format
+  var regEx = /^\d{4}-\d{1,2}-\d{2}$/;
+  if (!dateString.match(regEx)) return false; // Invalid format
+  var d = new Date(dateString);
+  if (Number.isNaN(d.getTime())) return false; // Invalid date
+  return d.toISOString().slice(0, 10) === dateString;
+}
+
+export const addStockValidation = values => {
+  const errors = {};
+  if (!values.stockname) {
+    errors.stockname = "Stock name is required";
+  }
+  if (!values.amount) {
+    errors.amount = "Amount is required";
+  } else if (isNaN(values.amount)) {
+    errors.amount = "Amount should be a number";
+  }
+  if (!values.price) {
+    errors.price = "Price is required";
+  } else if (isNaN(values.price)) {
+    errors.price = "Price should be a number";
+  }
+  if (!values.date) {
+    errors.date = "Date is required";
+  } else if (
+    !/^((0|1)\d{1})\/((0|1|2)\d{1})\/((19|20)\d{2})$/.test(values.date)
+  ) {
+    errors.date = "Date is invalid";
+  }
+  return errors;
+};

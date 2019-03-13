@@ -1,0 +1,24 @@
+.sa--table {
+  border: 1px solid #000;
+  background-color: #000;
+}
+
+.sa--table-row {
+  border-bottom: 1px solid #000 !important;
+}
+
+.sa--table-row-body {
+  background-color: #1d1d1d !important;
+}
+
+.sa--table-batch-action {
+  color: #fff !important;
+  .bx--btn__icon {
+    fill: #fff !important;
+  }
+}
+
+.bx--batch-summary,
+.bx--batch-summary__cancel {
+  color: #fff !important;
+}
