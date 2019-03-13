@@ -1,4 +1,4 @@
-export const API_BASE_PATH = "https://stock-analyzer-api.herokuapp.com";
+export const API_BASE_PATH = "http://ec2-52-91-157-120.compute-1.amazonaws.com";
 // export const API_BASE_PATH = 'http://localhost:9082';
 export const USER_REGISTER_ENDPOINT = "/api/auth/signup";
 

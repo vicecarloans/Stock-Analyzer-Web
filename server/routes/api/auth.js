@@ -2,13 +2,14 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const axios = require("axios");
+const resourceConstants = require("../../constants/resource");
 const SessionModel = mongoose.model("sessions");
 
 router.post("/signin", async (req, res, next) => {
   try {
     const body = { ...req.body };
     const { data } = await axios.post(
-      "https://stock-analyzer-api.herokuapp.com/api/auth/signin",
+      `${resourceConstants.RESOURCE_SERVER_URI}/api/auth/signin`,
       JSON.stringify(body),
       {
         headers: { "Content-Type": "application/json" }

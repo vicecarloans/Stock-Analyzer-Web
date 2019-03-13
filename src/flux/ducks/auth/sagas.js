@@ -74,10 +74,8 @@ export function* loginUserSaga() {
       JSON.stringify(body),
       REQUEST_HEADERS_AUTH
     );
-
     yield put(loginSuccess(res));
-
-    Router.replaceRoute("/dashboard");
+    Router.pushRoute("/dashboard");
   } catch (err) {
     yield put(loginFailed(err));
   }
