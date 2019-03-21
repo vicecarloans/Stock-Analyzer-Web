@@ -16,20 +16,18 @@ import { newsSymbolsSelector } from "./selectors";
 
 export function* fetchMixedNewsSaga() {
   try {
-    // const { data } = yield call(
-    // 	Axios.get,
-    // 	`${BASE_URL}${GET_NEWS}/last/1?token=${TOKEN}&symbols=${STOCKS.join(
-    // 		','
-    // 	)}`
-    // );
-    // let res = [];
-    // for (let news of data) {
-    // 	for (let n of news) {
-    // 		res.push(n);
-    // 	}
-    // }
-    // yield put(fetchMixedNewsSuccess(res));
-    yield put(fetchMixedNewsFailed());
+    const { data } = yield call(
+      Axios.get,
+      `${BASE_URL}${GET_NEWS}/last/1?token=${TOKEN}&symbols=${STOCKS.join(",")}`
+    );
+    let res = [];
+    for (let news of data) {
+      for (let n of news) {
+        res.push(n);
+      }
+    }
+    yield put(fetchMixedNewsSuccess(res));
+    // yield put(fetchMixedNewsFailed());
   } catch (err) {
     yield put(fetchMixedNewsFailed(err));
   }
