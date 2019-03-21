@@ -14,6 +14,7 @@ import {
 } from "constants/api";
 import { Provider } from "react-redux";
 import "../static/custom-carbon-theme.scss";
+import "react-virtualized/styles.css";
 import { PersistGate } from "redux-persist/integration/react";
 import { pathType } from "utils/antMatcher";
 import NProgress from "nprogress";

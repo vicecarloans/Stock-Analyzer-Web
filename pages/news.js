@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Construction from "components/common/Construction";
-
+import { News as NewsComponent } from "components/News";
 export default class news extends Component {
   render() {
-    return <Construction />;
+    return <NewsComponent />;
   }
 }
