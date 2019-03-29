@@ -21,3 +21,9 @@ export const toggleSellStock = stocks => ({
     stocks
   }
 });
+
+export const TOGGLE_COMPANY_MODAL = "TOGGLE_COMPANY_MODAL";
+
+export const toggleCompanyModal = () => ({
+  type: TOGGLE_COMPANY_MODAL
+});

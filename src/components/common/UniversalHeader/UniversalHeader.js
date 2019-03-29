@@ -55,7 +55,7 @@ export class UniversalHeader extends Component {
 
   getLeft = () => (
     <HeaderLeft>
-      <Link prefetch route="/">
+      <Link route="/">
         <img
           style={{ cursor: "pointer" }}
           src="static/images/logo.png"

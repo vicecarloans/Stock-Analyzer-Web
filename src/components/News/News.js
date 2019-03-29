@@ -32,7 +32,7 @@ import {
 import combineSelectors from "utils/combineSelectors";
 import { WindowScroller, List, AutoSizer } from "react-virtualized";
 import { SAButton } from "components/common";
-import { TOKEN } from "constants/iextrading";
+import { TOKEN_API } from "constants/iextrading";
 
 export class News extends Component {
   static propTypes = {
@@ -68,7 +68,7 @@ export class News extends Component {
       this.props.addFilter(selectedItems);
     } else {
       this.props.clearFilter();
-      this.scroller.forceUpdate();
+      this.scroller.forceUpdateGrid();
     }
   };
   listRenderer = ({ key, index, isScrolling, isVisible, style }) => {
@@ -77,11 +77,13 @@ export class News extends Component {
     const datetime = new Date(current.datetime);
     return (
       <NewsListingContainer
-        onClick={() => window.open(`${current.url}?token=${TOKEN}`, "_blank")}
+        onClick={() =>
+          window.open(`${current.url}?token=${TOKEN_API}`, "_blank")
+        }
         key={key}
         style={style}
       >
-        <NewsPicture image={`${current.image}?token=${TOKEN}`} />
+        <NewsPicture image={`${current.image}?token=${TOKEN_API}`} />
         <NewsDetailsWrapper>
           <NewsDate>
             {datetime.toLocaleDateString("en-US")} | {current.source}
@@ -126,14 +128,13 @@ export class News extends Component {
                   height={height}
                   isScrolling={isScrolling}
                   onScroll={onChildScroll}
-                  rowCount={this.props.news.length - 1}
+                  rowCount={this.props.news.length}
                   rowHeight={250}
                   rowRenderer={this.listRenderer}
                   scrollTop={scrollTop}
                   width={width}
                   ref={ref => (this.scroller = ref)}
                   scrollToAlignment="center"
-                  scrollToRow={10}
                 />
               )}
             </AutoSizer>
@@ -169,7 +170,7 @@ export class News extends Component {
         </SearchDiv>
         <NewsListingWrapper>{this.renderListing()}</NewsListingWrapper>
         <SAButton onClick={this.scrollToTop} type="sticky">
-          <i class="material-icons">vertical_align_top</i>
+          <i className="material-icons">vertical_align_top</i>
         </SAButton>
       </NewsWrapper>
     );

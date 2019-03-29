@@ -1,13 +1,15 @@
 import {
   TOGGLE_ADD_STOCK,
   TOGGLE_DELETE_STOCK,
-  TOGGLE_SELL_STOCK
+  TOGGLE_SELL_STOCK,
+  TOGGLE_COMPANY_MODAL
 } from "./actions";
 
 const initialState = {
   addStock: false,
   deleteStock: false,
-  sellStock: false
+  sellStock: false,
+  company: false
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -18,6 +20,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, deleteStock: !state.deleteStock };
     case TOGGLE_SELL_STOCK:
       return { ...state, sellStock: !state.sellStock };
+    case TOGGLE_COMPANY_MODAL:
+      return { ...state, company: !state.company };
     default:
       return state;
   }

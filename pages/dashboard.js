@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import Construction from "components/common/Construction";
-
+import { Dashboard as DashboardComponent } from "components/Dashboard";
 export default class dashboard extends Component {
   render() {
-    return <Construction />;
+    return <DashboardComponent />;
   }
 }

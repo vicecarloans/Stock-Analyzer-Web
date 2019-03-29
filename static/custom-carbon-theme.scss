@@ -255,3 +255,29 @@ input[type="number"]::-webkit-outer-spin-button {
 .sa--tag {
   margin: 0 15px;
 }
+
+.sa--btn-see-more {
+  display: inline-flex !important;
+  color: #fff;
+}
+.bx--content-switcher-btn.bx--content-switcher--selected {
+  color: #fff;
+}
+.sa--drop-down-indicator {
+  width: 25%;
+}
+
+.ReactVirtualized__Table__row {
+  cursor: pointer;
+  &:hover {
+    color: #4a6ef5;
+  }
+}
+.sa--range-switcher {
+  display: flex;
+  justify-content: center;
+}
+
+.sa--company-detail-row {
+  margin: 10px -10px;
+}

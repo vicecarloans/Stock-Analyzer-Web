@@ -1,5 +1,5 @@
 import { takeLatest, put, call, select } from "redux-saga/effects";
-import { BASE_URL, TOKEN, GET_NEWS } from "constants/iextrading";
+import { BASE_URL, TOKEN_API, GET_NEWS } from "constants/iextrading";
 import { STOCKS } from "constants/portfolio/stocks";
 import Axios from "axios";
 import {
@@ -18,7 +18,9 @@ export function* fetchMixedNewsSaga() {
   try {
     const { data } = yield call(
       Axios.get,
-      `${BASE_URL}${GET_NEWS}/last/1?token=${TOKEN}&symbols=${STOCKS.join(",")}`
+      `${BASE_URL}${GET_NEWS}/last/1?token=${TOKEN_API}&symbols=${STOCKS.join(
+        ","
+      )}`
     );
     let res = [];
     for (let news of data) {
@@ -40,7 +42,7 @@ export function* fetchFilteredNewsSaga() {
       const total = Math.floor(50 / symbols.length);
       const { data } = yield call(
         Axios.get,
-        `${BASE_URL}${GET_NEWS}/last/${total}?token=${TOKEN}&symbols=${symbols.join(
+        `${BASE_URL}${GET_NEWS}/last/${total}?token=${TOKEN_API}&symbols=${symbols.join(
           ","
         )}`
       );
