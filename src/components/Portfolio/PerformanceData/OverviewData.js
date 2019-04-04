@@ -12,8 +12,14 @@ import {
   MiniPortfolioDataWithPercentage,
   MiniPortfolioDataSection
 } from "./PerformanceData.styles";
-
-export default class OverviewData extends PureComponent {
+import { SkeletonText } from "carbon-components-react";
+import { connect } from "react-redux";
+import combineSelectors from "utils/combineSelectors";
+import {
+  chartLoadingSelector,
+  breakdownsLoadingSelector
+} from "flux/ducks/portfolio";
+class OverviewData extends PureComponent {
   static propTypes = {
     portfolioChange: PropTypes.string.isRequired,
     portfolioChangePercentage: PropTypes.number.isRequired,
@@ -34,7 +40,9 @@ export default class OverviewData extends PureComponent {
     bestStock: PropTypes.shape({
       name: PropTypes.string,
       percentage: PropTypes.number
-    })
+    }),
+    chartLoading: PropTypes.bool.isRequired,
+    breakdownsLoading: PropTypes.bool.isRequired
   };
 
   static defaultProps = {
@@ -52,34 +60,51 @@ export default class OverviewData extends PureComponent {
       leastProfitable,
       mostProfitable,
       worstStock,
-      bestStock
+      bestStock,
+      chartLoading,
+      breakdownsLoading
     } = this.props;
     return (
       <OverviewPortfolioDataWrapper>
         <PortfolioChangeWrapper>
           <PortfolioTitle>Portfolio Change</PortfolioTitle>
-          <PortfolioDataWithPercentage
-            percentage={portfolioChangePercentage}
-          >{`${portfolioChange} (${portfolioChangePercentage} %)`}</PortfolioDataWithPercentage>
+          {chartLoading ? (
+            <SkeletonText />
+          ) : (
+            <PortfolioDataWithPercentage
+              percentage={portfolioChangePercentage}
+            >{`${portfolioChange} (${portfolioChangePercentage} %)`}</PortfolioDataWithPercentage>
+          )}
         </PortfolioChangeWrapper>
         <MiniPortfolioChangeWrapper border={true}>
           <MiniPortfolioChangeSection>
             <MiniPortfolioTitle>Portfolio MIN</MiniPortfolioTitle>
-            <MiniPortfolioDataWithoutPercentage>
-              {portfolioMin}
-            </MiniPortfolioDataWithoutPercentage>
+            {chartLoading ? (
+              <SkeletonText />
+            ) : (
+              <MiniPortfolioDataWithoutPercentage>
+                {portfolioMin}
+              </MiniPortfolioDataWithoutPercentage>
+            )}
           </MiniPortfolioChangeSection>
           <MiniPortfolioChangeSection>
             <MiniPortfolioTitle>Portfolio MAX</MiniPortfolioTitle>
-            <MiniPortfolioDataWithoutPercentage>
-              {portfolioMax}
-            </MiniPortfolioDataWithoutPercentage>
+            {chartLoading ? (
+              <SkeletonText />
+            ) : (
+              <MiniPortfolioDataWithoutPercentage>
+                {portfolioMax}
+              </MiniPortfolioDataWithoutPercentage>
+            )}
           </MiniPortfolioChangeSection>
         </MiniPortfolioChangeWrapper>
         <MiniPortfolioChangeWrapper border={true}>
           <MiniPortfolioChangeSection>
             <MiniPortfolioTitle>Least Profitable</MiniPortfolioTitle>
-            {leastProfitable && (
+
+            {breakdownsLoading ? (
+              <SkeletonText />
+            ) : (
               <MiniPortfolioDataSection>
                 <MiniPortfolioDataWithoutPercentage>
                   {leastProfitable.name} -
@@ -93,7 +118,10 @@ export default class OverviewData extends PureComponent {
           </MiniPortfolioChangeSection>
           <MiniPortfolioChangeSection>
             <MiniPortfolioTitle>Most Profitable</MiniPortfolioTitle>
-            {mostProfitable && (
+
+            {breakdownsLoading ? (
+              <SkeletonText />
+            ) : (
               <MiniPortfolioDataSection>
                 <MiniPortfolioDataWithoutPercentage>
                   {mostProfitable.name} -
@@ -109,7 +137,10 @@ export default class OverviewData extends PureComponent {
         <MiniPortfolioChangeWrapper border={false}>
           <MiniPortfolioChangeSection>
             <MiniPortfolioTitle>Worst Stock</MiniPortfolioTitle>
-            {worstStock && (
+
+            {breakdownsLoading ? (
+              <SkeletonText />
+            ) : (
               <MiniPortfolioDataSection>
                 <MiniPortfolioDataWithoutPercentage>
                   {worstStock.name}
@@ -123,7 +154,10 @@ export default class OverviewData extends PureComponent {
           </MiniPortfolioChangeSection>
           <MiniPortfolioChangeSection>
             <MiniPortfolioTitle>Best Stock</MiniPortfolioTitle>
-            {bestStock && (
+
+            {breakdownsLoading ? (
+              <SkeletonText />
+            ) : (
               <MiniPortfolioDataSection>
                 <MiniPortfolioDataWithoutPercentage>
                   {bestStock.name}
@@ -140,3 +174,10 @@ export default class OverviewData extends PureComponent {
     );
   }
 }
+
+const MapStateToProps = combineSelectors({
+  chartLoading: chartLoadingSelector,
+  breakdownsLoading: breakdownsLoadingSelector
+});
+
+export default connect(MapStateToProps)(OverviewData);

@@ -8,32 +8,36 @@ import {
   DataSquareBodyText,
   DataSquareBodyTextPercentage
 } from "./Portfolio.styles";
+import { SkeletonText } from "carbon-components-react";
+import { connect } from "react-redux";
+import combineSelectors from "utils/combineSelectors";
+import {
+  performanceSelector,
+  performanceLoadingSelector
+} from "flux/ducks/portfolio";
 
 export class DataSquare extends PureComponent {
   static propTypes = {
     header: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
-    percentage: PropTypes.number
-  };
-
-  static defaultProps = {
-    percentage: null
+    performance: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired
   };
 
   render() {
-    const { header, body, percentage } = this.props;
+    const { header, body, loading, performance } = this.props;
     return (
       <DataSquareDiv>
         <DataSquareHeader>
           <DataSquareHeaderText>{header}</DataSquareHeaderText>
         </DataSquareHeader>
         <DataSquareBody>
-          {percentage ? (
-            <DataSquareBodyTextPercentage
-              percentage={percentage}
-            >{`${body} (${percentage} %)`}</DataSquareBodyTextPercentage>
+          {loading ? (
+            <SkeletonText />
           ) : (
-            <DataSquareBodyText>{body}</DataSquareBodyText>
+            <DataSquareBodyText>
+              $ {performance[body].toFixed(2)}
+            </DataSquareBodyText>
           )}
         </DataSquareBody>
       </DataSquareDiv>
@@ -41,4 +45,8 @@ export class DataSquare extends PureComponent {
   }
 }
 
-export default DataSquare;
+const MapStateToProps = combineSelectors({
+  performance: performanceSelector,
+  loading: performanceLoadingSelector
+});
+export default connect(MapStateToProps)(DataSquare);

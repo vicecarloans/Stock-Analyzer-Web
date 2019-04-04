@@ -24,7 +24,10 @@ router.get("/", requireLogin, async (req, res, next) => {
     }
     throw new Error({ status: 401, message: "No token found" });
   } catch (err) {
-    next(new Error({ status: err.status, message: err.message }));
+    next({
+      status: err.response.data.status,
+      message: err.response.data.message
+    });
   }
 });
 
@@ -49,7 +52,10 @@ router.put("/", requireLogin, async (req, res, next) => {
       return res.json({ data });
     }
   } catch (err) {
-    next(new Error({ status: err.status, message: err.message }));
+    next({
+      status: err.response.data.status,
+      message: err.response.data.message
+    });
   }
 });
 
@@ -102,12 +108,10 @@ router.put("/picture", requireLogin, uploading, async (req, res, next) => {
       return res.json({ data, picture });
     }
   } catch (err) {
-    next(
-      new Error({
-        status: err.status,
-        message: err.message
-      })
-    );
+    next({
+      status: err.response.data.status,
+      message: err.response.data.message
+    });
   }
 });
 

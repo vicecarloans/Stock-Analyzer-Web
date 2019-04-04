@@ -12,52 +12,24 @@ import { XAxis, YAxis } from "react-stockcharts/lib/axes";
 import {
   CrossHairCursor,
   MouseCoordinateX,
-  MouseCoordinateY
+  MouseCoordinateY,
+  EdgeIndicator
 } from "react-stockcharts/lib/coordinates";
 
 import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
 import { last } from "react-stockcharts/lib/utils";
 import { fitWidth } from "react-stockcharts/lib/helper";
-
-import Axios from "axios";
-
-function parseData(parse) {
-  return function(d) {
-    d.date = parse(d.date);
-    d.open = +d.open;
-    d.high = +d.high;
-    d.low = +d.low;
-    d.close = +d.close;
-    d.volume = +d.volume;
-
-    return d;
-  };
-}
-const parseDate = timeParse("%Y-%m-%d");
+import {
+  chartDataSelector,
+  chartLoadingSelector,
+  chartPerformanceSelector
+} from "flux/ducks/portfolio";
+import combineSelectors from "utils/combineSelectors";
 
 export class PortfolioChart extends Component {
-  state = {
-    data: null
-  };
-  componentDidMount() {
-    const promiseCompare = fetch(
-      "https://cdn.rawgit.com/rrag/react-stockcharts/master/docs/data/comparison.tsv"
-    )
-      .then(response => response.text())
-      .then(data =>
-        tsvParse(data, d => {
-          d = parseData(parseDate)(d);
-          d.SP500Close = +d.SP500Close;
-          d.AAPLClose = +d.AAPLClose;
-          d.GEClose = +d.GEClose;
-          return d;
-        })
-      );
-    promiseCompare.then(data => this.setState({ data }));
-  }
   renderChart = () => {
-    if (this.state.data) {
-      const { data: initialData } = this.state;
+    if (!this.props.loading) {
+      const { data: initialData } = this.props;
       const { width, ratio } = this.props;
       const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(
         d => d.date
@@ -107,7 +79,7 @@ export class PortfolioChart extends Component {
           xScale={xScale}
           xExtents={xExtents}
         >
-          <Chart id={1} yExtents={d => [d.high, d.low, d.AAPLClose, d.GEClose]}>
+          <Chart id={1} yExtents={d => [d.value]}>
             <XAxis
               axisAt="bottom"
               orient="bottom"
@@ -134,8 +106,22 @@ export class PortfolioChart extends Component {
               orient="left"
               displayFormat={format(".2f")}
             />
+            <EdgeIndicator
+              itemType="last"
+              orient="right"
+              edgeAt="right"
+              yAccessor={d => d.value}
+              fill="#3d87ff"
+            />
+            <LineSeries
+              yAccessor={d => d.value}
+              stroke={
+                this.props.performance.portfolioChangePercent > 1
+                  ? "#19BE87"
+                  : "#FF1744"
+              }
+            />
 
-            <LineSeries yAccessor={d => d.AAPLClose} stroke="#FF1744" />
             <CrossHairCursor className="sa--crosshair" />
           </Chart>
         </ChartCanvas>
@@ -149,7 +135,11 @@ export class PortfolioChart extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = combineSelectors({
+  performance: chartPerformanceSelector,
+  data: chartDataSelector,
+  loading: chartLoadingSelector
+});
 
 const mapDispatchToProps = {};
 

@@ -1,6 +1,6 @@
 export const INDICATORS = [
-  "Moving Average",
+  "AI Regression",
   "MACD",
   "Stochastic Oscillator",
-  "AI Predictor"
+  "AI Predictor News"
 ];

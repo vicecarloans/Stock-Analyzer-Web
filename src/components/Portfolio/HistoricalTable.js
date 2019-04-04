@@ -2,29 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "static/css/table.scss";
-import { DataTable } from "carbon-components-react";
+import { DataTable, DataTableSkeleton } from "carbon-components-react";
 import { toggleDeleteStock, toggleSellStock } from "flux/ducks/modals";
-
-const initialRows = [
-  {
-    id: "AAPL",
-    name: "AAPL (Apple Inc.)",
-    price: "$108.50",
-    total: "$1,750.00",
-    profitLoss: "$750.50",
-    change: "10.80%",
-    type: 0 //meaning Loss
-  },
-  {
-    id: "GOOGL",
-    name: "GOOGL (Google Inc.)",
-    price: "$208.50",
-    total: "$2,750.00",
-    profitLoss: "$950.50",
-    change: "8.10%",
-    type: 1 //meaning Profitable
-  }
-];
+import {
+  tableDataSelector,
+  tableDataLoadingSelector
+} from "flux/ducks/portfolio";
+import combineSelectors from "utils/combineSelectors";
 
 const headers = [
   {
@@ -70,13 +54,17 @@ const {
 } = DataTable;
 
 export class HistoricalTable extends Component {
+  static propTypes = {
+    tableData: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired,
+    toggleDeleteStock: PropTypes.func.isRequired,
+    toggleSellStock: PropTypes.func.isRequired
+  };
   onDelete = rows => {
-    console.log(rows);
     this.props.toggleDeleteStock(rows);
   };
 
   onSell = rows => {
-    console.log(rows);
     this.props.toggleSellStock(rows);
   };
   renderTable = ({
@@ -131,7 +119,9 @@ export class HistoricalTable extends Component {
               >
                 <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map(cell => (
-                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                  <TableCell key={cell.id}>
+                    {!isNaN(cell.value) ? cell.value.toFixed(2) : cell.value}
+                  </TableCell>
                 ))}
               </TableRow>
             ))}
@@ -141,17 +131,19 @@ export class HistoricalTable extends Component {
     );
   };
   render() {
-    return (
-      <DataTable
-        rows={initialRows}
-        headers={headers}
-        render={this.renderTable}
-      />
+    const { tableData, loading } = this.props;
+    return loading ? (
+      <DataTableSkeleton />
+    ) : (
+      <DataTable rows={tableData} headers={headers} render={this.renderTable} />
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = combineSelectors({
+  tableData: tableDataSelector,
+  loading: tableDataLoadingSelector
+});
 
 const mapDispatchToProps = {
   toggleDeleteStock,

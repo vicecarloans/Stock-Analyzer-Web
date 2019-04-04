@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Modal } from "carbon-components-react";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm, Field, reset } from "redux-form";
 import { SAInput } from "components/common";
 import combineSelectors from "utils/combineSelectors";
 import { STOCKS } from "constants/portfolio/stocks";
@@ -14,8 +14,11 @@ import {
 } from "constants/fieldType";
 import { toggleAddStock } from "flux/ducks/modals";
 import { addStockValidation } from "utils/validation";
+import { buyStock } from "flux/ducks/portfolio";
 
-const onSubmit = values => {};
+const onSubmit = (values, dispatch) => {
+  dispatch(buyStock(values));
+};
 
 export class AddStockModal extends Component {
   static propTypes = {
@@ -32,7 +35,7 @@ export class AddStockModal extends Component {
   renderField = props => <SAInput {...props} />;
 
   render() {
-    const { handleSubmit, open, danger, toggleAddStock } = this.props;
+    const { handleSubmit, open, danger, toggleAddStock, reset } = this.props;
     return (
       <Modal
         shouldSubmitOnEnter={false}
@@ -40,7 +43,10 @@ export class AddStockModal extends Component {
         primaryButtonText="Add"
         secondaryButtonText="Cancel"
         iconDescription="Close the modal"
-        onRequestClose={toggleAddStock}
+        onRequestClose={() => {
+          toggleAddStock();
+          reset("add-stock");
+        }}
         onRequestSubmit={handleSubmit}
         open={open}
         danger={danger}
@@ -59,6 +65,7 @@ export class AddStockModal extends Component {
             name="amount"
             type={NUMBER_INPUT}
             label="Amount"
+            max={100}
           />
           <Field
             component={this.renderField}
@@ -66,13 +73,6 @@ export class AddStockModal extends Component {
             type={TEXT_INPUT}
             placeholder="e.g. 20.00"
             label="Buy Price"
-          />
-          <Field
-            component={this.renderField}
-            name="date"
-            type={DATE_PICKER}
-            placeholder="e.g. 03/05/2019"
-            label="Buy Date"
           />
         </div>
       </Modal>
@@ -89,7 +89,8 @@ AddStockModal = reduxForm({
 const mapStateToProps = combineSelectors({});
 
 const mapDispatchToProps = {
-  toggleAddStock
+  toggleAddStock,
+  reset
 };
 
 export default connect(

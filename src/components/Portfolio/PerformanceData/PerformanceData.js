@@ -13,38 +13,68 @@ import { Tabs, Tab } from "carbon-components-react";
 import OverviewData from "./OverviewData";
 import PortfolioChart from "./PortfolioChart";
 import { IncomeStatement, CashflowStatement } from "./AccountingData";
+import combineSelectors from "utils/combineSelectors";
+import {
+  chartSelector,
+  breakdownsSelector,
+  performanceSelector
+} from "flux/ducks/portfolio";
 
 export class PerformanceData extends Component {
+  static propTypes = {
+    chart: PropTypes.object.isRequired,
+    breakdowns: PropTypes.object.isRequired
+  };
   getOverviewData = () => {
-    const mockData = {
-      portfolioChange: "$-711.59",
-      portfolioChangePercentage: -5.7,
-      portfolioMin: "$ 4,780.58",
-      portfolioMax: "$ 5,601.56",
-      leastProfitable: { name: "AAPL", loss: "$-711.59" },
-      mostProfitable: { name: "GOOGL", profit: "$100.70" },
-      worstStock: { name: "AAPL", percentage: -2.5 },
-      bestStock: { name: "GOOGL", percentage: 1.5 }
+    const { chart, breakdowns } = this.props;
+    const overview = {
+      portfolioMin: `$ ${chart.performance.portfolioMIN}`,
+      portfolioMax: `$ ${chart.performance.portfolioMAX}`,
+      portfolioChange: `$ ${chart.performance.portfolioChange}`,
+      portfolioChangePercentage: parseFloat(
+        (chart.performance.portfolioChangePercent * 100).toFixed(1)
+      ),
+      leastProfitable: {
+        name: breakdowns.leastProfit.name,
+        loss: `$ ${breakdowns.leastProfit.value.toFixed(2)}`
+      },
+      mostProfitable: {
+        name: breakdowns.mostProfit.name,
+        profit: `$ ${breakdowns.mostProfit.value.toFixed(2)}`
+      },
+      worstStock: {
+        name: breakdowns.worstStock.name,
+        percentage: parseFloat(breakdowns.worstStock.value.toFixed(2))
+      },
+      bestStock: {
+        name: breakdowns.bestStock.name,
+        percentage: parseFloat(breakdowns.bestStock.value.toFixed(2))
+      }
     };
-    return mockData;
+    return overview;
   };
 
   generateIncomeStatement = () => {
-    const mockData = {
-      totalInvestment: "$0",
-      totalRevenue: "$0",
-      realizedPL: "$0",
+    const { performance } = this.props;
+
+    const data = {
+      totalInvestment: `$ ${performance.totalInvestment.toFixed(2)}`,
+      totalRevenue: `$ ${performance.totalRevenue.toFixed(2)}`,
+      realizedPL: `$ ${performance.realizedPL.toFixed(2)}`,
       taxExempt: "$0",
-      taxPayable: "$0"
+      taxPayable: `$ ${(performance.totalRevenue * 0.13).toFixed(2)}`
     };
-    return mockData;
+    return data;
   };
 
   generateCashflowStatement = () => {
+    const { performance } = this.props;
     const mockData = {
-      totalInvestment: "$0",
-      totalRevenue: "$0",
-      netCashflow: "$0"
+      totalInvestment: `$ ${performance.totalInvestment.toFixed(2)}`,
+      totalRevenue: `$ ${performance.totalRevenue.toFixed(2)}`,
+      netCashflow: `$ ${(
+        performance.totalRevenue - performance.totalInvestment
+      ).toFixed(2)}`
     };
     return mockData;
   };
@@ -79,7 +109,11 @@ export class PerformanceData extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = combineSelectors({
+  performance: performanceSelector,
+  chart: chartSelector,
+  breakdowns: breakdownsSelector
+});
 
 const mapDispatchToProps = {};
 

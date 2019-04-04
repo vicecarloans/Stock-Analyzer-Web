@@ -18,6 +18,7 @@ import {
 export default class SAInput extends PureComponent {
   static propTypes = {
     input: PropTypes.any.isRequired,
+    max: PropTypes.number,
     placeholder: PropTypes.string,
     label: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -27,7 +28,8 @@ export default class SAInput extends PureComponent {
 
   static defaultProps = {
     placeholder: "",
-    items: []
+    items: [],
+    max: 100
   };
 
   renderField = () => {
@@ -112,6 +114,7 @@ export default class SAInput extends PureComponent {
             light={false}
             invalid={touched && !!error}
             min={0}
+            max={this.props.max}
             invalidText={error}
             onChange={e => input.onChange(this.num.state.value)}
           />

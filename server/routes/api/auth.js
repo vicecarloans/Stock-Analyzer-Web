@@ -26,7 +26,10 @@ router.post("/signin", async (req, res, next) => {
 
     return res.json({ status: 1, message: "User signed in successfully" });
   } catch (err) {
-    next(new Error({ status: 400, message: "Wrong email/password" }));
+    next({
+      status: err.response.data.status,
+      message: err.response.data.message
+    });
   }
 });
 

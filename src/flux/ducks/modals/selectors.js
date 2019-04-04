@@ -21,3 +21,8 @@ export const companyModalSelector = createSelector(
   modalsSelector,
   modals => modals.company
 );
+
+export const selectedStocksSelector = createSelector(
+  modalsSelector,
+  modals => modals.stocks
+);

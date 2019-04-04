@@ -27,6 +27,9 @@ export const getCompanySummaryByStock = stock => `/stock/${stock}/company`;
 //Status
 export const getStatusByStock = stock => `/stock/${stock}/stats`;
 
+//OHLC
+export const OHLC_ENDPOINT = "/stock/market/ohlc";
+
 /* Streaming API start here */
 
 export const BASE_URL_STREAMING = "https://cloud-sse.iexapis.com/beta";

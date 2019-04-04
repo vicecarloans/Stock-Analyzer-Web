@@ -209,10 +209,10 @@ export class StockChart extends Component {
             {...graphData.yGrid}
           />
           <CandlestickSeries {...candlesAppearance} />
-          {this.props.indicator === "Moving Average" && (
+          {this.props.indicator === "AI Regression" && (
             <LineSeries yAccessor={sma20.accessor()} stroke={sma20.stroke()} />
           )}
-          {this.props.indicator === "Moving Average" && (
+          {this.props.indicator === "AI Regression" && (
             <CurrentCoordinate
               yAccessor={sma20.accessor()}
               fill={sma20.stroke()}

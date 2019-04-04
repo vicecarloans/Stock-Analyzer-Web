@@ -21,6 +21,6 @@ export const TEAM = [
     title: "(Fullstack & Co-Founder)",
     picture: "huy-icon",
     bio:
-      "Professional Software Developer with an expertice of 5 years in the fields of Full-Stack Development and back-end devlopment. Huy has extensive skills working with AWS services and Microservices Architecture implementing tools such as Kubernetes, Docker, CI/CD, and Jenkins. He has rich experience with framworks such as Node, Angular, and React",
+      "Professional Software Developer with an expertice of 5 years in the fields of Full-Stack Development and back-end devlopment. Huy has extensive skills working with AWS services and Microservices Architecture implementing tools such as Kubernetes, Docker, CI/CD, and Jenkins. He has rich experience with frameworks such as Node, Angular, and React"
   }
 ];
