@@ -13,7 +13,8 @@ import {
   selectedStockSelector,
   filterStock,
   filteredListSelector,
-  keywordListSelector
+  keywordListSelector,
+  predictStock
 } from "flux/ducks/stream";
 import { STOCKS } from "constants/portfolio/stocks";
 import combineSelectors from "utils/combineSelectors";
@@ -44,9 +45,10 @@ export class StockList extends Component {
 
   generateStockData = stock => {
     this.props.selectStock(stock);
+
     this.props.initStockDataIntraday(stock);
     const { selectedStock } = this.props;
-
+    this.props.predictStock(stock);
     this.props.stopQuoteChannel(selectedStock);
 
     this.props.startQuoteChannel(stock);
@@ -128,7 +130,8 @@ const mapDispatchToProps = {
   initStockDataIntraday,
   selectStock,
   initStockLast,
-  filterStock
+  filterStock,
+  predictStock
 };
 
 export default connect(

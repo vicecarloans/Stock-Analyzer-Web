@@ -63,6 +63,7 @@ export class Dashboard extends Component {
     if (selectedItem === "AI Predictor News") {
       this.props.predictStock();
     }
+
     this.setState({ indicator: selectedItem });
   };
   openSeeMore = () => {
@@ -127,6 +128,16 @@ export class Dashboard extends Component {
         return 0;
     }
   };
+  renderPrediction = () => {
+    return this.props.predictionLoading ? (
+      <InlineLoading
+        className="sa--prediction-loading"
+        description="Loading data..."
+      />
+    ) : (
+      <div>{this.props.prediction == 1 ? "Undervalued" : "Overvalued"}</div>
+    );
+  };
   render() {
     return (
       <DashboardContainer>
@@ -145,17 +156,11 @@ export class Dashboard extends Component {
               label="Indicators"
               itemToString={item => item}
               items={INDICATORS}
+              initialSelectedItem={this.state.indicator}
               onChange={this.handleIndicator}
             />
-
-            {this.props.predictionLoading ? (
-              <InlineLoading
-                className="sa--prediction-loading"
-                description="Loading data..."
-              />
-            ) : (
-              <div>{this.props.prediction}</div>
-            )}
+            {this.state.indicator == "AI Predictor News" &&
+              this.renderPrediction()}
           </ToolsContainer>
 
           <HistoricalChartContainer>

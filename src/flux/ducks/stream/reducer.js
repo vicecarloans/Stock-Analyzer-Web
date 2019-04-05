@@ -114,7 +114,7 @@ const list = (state = initialListState, { type, payload }) => {
       return {
         ...state,
         filtered: state.data.filter(d =>
-          d.symbol.toLowerCase().includes(payload.keyword)
+          d.symbol.toLowerCase().includes(payload.keyword.toLowerCase())
         ),
         keyword: payload.keyword
       };

@@ -191,13 +191,11 @@ function* handleInitStockDataRangeSaga({ payload: { range } }) {
 function* handlePredictStock() {
   try {
     const selectedStock = yield select(selectedStockSelector);
-    const repsonse = yield call(
+    const { data } = yield call(
       Axios.get,
       `${RESOURCE_BASE_PATH}${PREDICTION_ENDPOINT}?quote=${selectedStock}`
     );
-    console.log(repsonse);
-    console.log(data);
-    yield put(predictStockSuccess(Number(data)));
+    yield put(predictStockSuccess(data));
   } catch (err) {
     yield put(predictStockFailed(err));
   }
