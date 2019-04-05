@@ -29,6 +29,9 @@ import combineSelectors from "utils/combineSelectors";
 export class PortfolioChart extends Component {
   renderChart = () => {
     if (!this.props.loading) {
+      if (this.props.data.length == 0) {
+        return <p>No data available</p>;
+      }
       const { data: initialData } = this.props;
       const { width, ratio } = this.props;
       const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(

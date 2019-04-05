@@ -219,7 +219,15 @@ router.get("/chart", requireLogin, async (req, res, next) => {
       });
     }
 
-    return res.json([]);
+    return res.json({
+      performance: {
+        portfolioMIN: 0.0,
+        portfolioMAX: 0.0,
+        portfolioChange: 0.0,
+        portfolioChangePercent: 0.0
+      },
+      portfolioValue: []
+    });
   } catch (err) {
     next({
       status: err.response.data.status,
@@ -361,10 +369,7 @@ router.get("/breakdowns", requireLogin, async (req, res, next) => {
       }, 0);
 
       const { data: endInvestment } = await axios.get(
-        `https://cloud.iexapis.com/beta/stock/${stock}/chart/ytd/${lastDate.replace(
-          /-/g,
-          ""
-        )}?chartByDay=true&chartLast=1&token=${iexToken}`
+        `https://cloud.iexapis.com/beta/stock/${stock}/chart/ytd?chartByDay=true&chartLast=1&token=${iexToken}`
       );
 
       let currQty = 0;
@@ -434,8 +439,9 @@ router.get("/table", requireLogin, async (req, res, next) => {
         const { data: currentPrice } = await axios.get(
           `https://cloud.iexapis.com/beta/stock/${
             transaction.stock
-          }/price?token=${iexToken}`
+          }/chart/ytd?chartByDay=true&chartLast=1&token=${iexToken}`
         );
+
         let curQty = transaction.initialQuantity;
         let revenue = 0;
 
@@ -443,15 +449,14 @@ router.get("/table", requireLogin, async (req, res, next) => {
           curQty -= sold.soldQuantity;
           revenue += sold.soldQuantity * sold.soldPrice;
         });
-        let endVal = revenue + curQty * currentPrice;
+        let endVal = revenue + curQty * currentPrice[0].close;
         let startVal = transaction.initialValue * transaction.initialQuantity;
         table.push({
           id: transaction.id + "/" + transaction.stock,
           name: transaction.stock,
-          price: currentPrice,
-          total: curQty * currentPrice,
+          price: currentPrice[0].close,
+          total: curQty * currentPrice[0].close,
           profitLoss: endVal - startVal,
-
           change: (endVal / startVal - 1) * 100,
           type: endVal > startVal ? 1 : 0
         });

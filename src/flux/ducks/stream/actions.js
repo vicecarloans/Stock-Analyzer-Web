@@ -154,3 +154,27 @@ export const initStockDataRangeFailed = err => ({
     err
   }
 });
+
+export const PREDICT_STOCK = "PREDICT_STOCK";
+
+export const predictStock = () => ({
+  type: PREDICT_STOCK
+});
+
+export const PREDICT_STOCK_SUCCESS = "PREDICT_STOCK_SUCCESS";
+
+export const predictStockSuccess = prediction => ({
+  type: PREDICT_STOCK_SUCCESS,
+  payload: {
+    prediction
+  }
+});
+
+export const PREDICT_STOCK_FAILED = "PREDICT_STOCK_FAILED";
+
+export const predictStockFailed = err => ({
+  type: PREDICT_STOCK_FAILED,
+  payload: {
+    err
+  }
+});

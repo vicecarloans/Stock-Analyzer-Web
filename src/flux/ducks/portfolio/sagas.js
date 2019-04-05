@@ -71,7 +71,6 @@ function* handlePortfolioChartSaga() {
     );
 
     const unix = timeParse("%Y-%m-%d");
-
     let formatted = [];
     for (let chart of data.portfolioValue) {
       formatted.push({

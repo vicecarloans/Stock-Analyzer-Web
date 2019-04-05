@@ -18,7 +18,10 @@ import {
   UPDATE_CANCELLATION_TOKEN,
   INIT_STOCK_DATA_RANGE,
   INIT_STOCK_DATA_RANGE_SUCCESS,
-  INIT_STOCK_DATA_RANGE_FAILED
+  INIT_STOCK_DATA_RANGE_FAILED,
+  PREDICT_STOCK_SUCCESS,
+  PREDICT_STOCK,
+  PREDICT_STOCK_FAILED
 } from "./actions";
 
 const initialStatusState = {
@@ -48,7 +51,9 @@ const initialChartState = {
   loading: false,
   selectedStock: null,
   cancellationToken: null,
-  range: "1d"
+  range: "1d",
+  prediction: "",
+  predictionLoading: false
 };
 
 const chart = (state = initialChartState, { type, payload }) => {
@@ -64,6 +69,16 @@ const chart = (state = initialChartState, { type, payload }) => {
       return { ...state, loading: false, data: payload.data };
     case INIT_STOCK_DATA_INTRADAY_FAILED:
       return { ...state, loading: false, err: payload.err };
+    case PREDICT_STOCK:
+      return { ...state, predictionLoading: true };
+    case PREDICT_STOCK_SUCCESS:
+      return {
+        ...state,
+        prediction: payload.prediction,
+        predictionLoading: false
+      };
+    case PREDICT_STOCK_FAILED:
+      return { ...state, err: payload.err, predictionLoading: false };
     case INIT_STOCK_DATA_RANGE:
       return { ...state, loading: true, data: [], range: payload.range };
     case INIT_STOCK_DATA_RANGE_SUCCESS:
@@ -98,7 +113,9 @@ const list = (state = initialListState, { type, payload }) => {
     case FILTER_STOCK_DISPLAY:
       return {
         ...state,
-        filtered: state.data.filter(d => d.symbol.includes(payload.keyword)),
+        filtered: state.data.filter(d =>
+          d.symbol.toLowerCase().includes(payload.keyword)
+        ),
         keyword: payload.keyword
       };
     default:

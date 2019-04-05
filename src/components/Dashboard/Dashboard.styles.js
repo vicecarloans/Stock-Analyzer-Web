@@ -19,6 +19,7 @@ export const ToolsContainer = styled.div`
   min-height: 10%;
   display: flex;
   justify-content: space-evenly;
+  flex-direction: row-reverse;
   align-items: center;
 `;
 

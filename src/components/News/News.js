@@ -170,7 +170,7 @@ export class News extends Component {
         </SearchDiv>
         <NewsListingWrapper>{this.renderListing()}</NewsListingWrapper>
         <SAButton onClick={this.scrollToTop} type="sticky">
-          <i className="material-icons">vertical_align_top</i>
+          <i className="material-icons scroll-top-icon">vertical_align_top</i>
         </SAButton>
       </NewsWrapper>
     );

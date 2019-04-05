@@ -1,5 +1,8 @@
-export const API_BASE_PATH = "http://ec2-52-91-157-120.compute-1.amazonaws.com";
-// export const API_BASE_PATH = 'http://localhost:9082';
+export const API_BASE_PATH = "https://stock-analyzer-api.huydam.com";
+export const RESOURCE_BASE_PATH = "http://178.128.226.186";
+
+export const PREDICTION_ENDPOINT = "/predict-ai";
+
 export const USER_REGISTER_ENDPOINT = "/api/auth/signup";
 
 export const USER_LOGIN_ENDPOINT = "/api/auth/signin";

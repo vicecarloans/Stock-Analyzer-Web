@@ -31,7 +31,10 @@ import {
   INIT_STOCK_DATA_INTRADAY,
   INIT_STOCK_DATA_RANGE,
   initStockDataRangeFailed,
-  initStockDataRangeSuccess
+  initStockDataRangeSuccess,
+  PREDICT_STOCK,
+  predictStockFailed,
+  predictStockSuccess
 } from "./actions";
 import {
   TOKEN_API,
@@ -46,7 +49,11 @@ import {
   cancellationTokenChartSelector,
   selectedStockSelector
 } from "./selectors";
-
+import {
+  RESOURCE_BASE_PATH,
+  PREDICTION_ENDPOINT,
+  REQUEST_HEADERS_AUTH
+} from "constants/api";
 import Axios from "axios";
 
 function* listenDisconnectQuoteStreamSaga() {
@@ -181,6 +188,21 @@ function* handleInitStockDataRangeSaga({ payload: { range } }) {
   }
 }
 
+function* handlePredictStock() {
+  try {
+    const selectedStock = yield select(selectedStockSelector);
+    const repsonse = yield call(
+      Axios.get,
+      `${RESOURCE_BASE_PATH}${PREDICTION_ENDPOINT}?quote=${selectedStock}`
+    );
+    console.log(repsonse);
+    console.log(data);
+    yield put(predictStockSuccess(Number(data)));
+  } catch (err) {
+    yield put(predictStockFailed(err));
+  }
+}
+
 export function* streamSagaWatcher() {
   while (true) {
     const { payload } = yield take(START_QUOTE_CHANNEL);
@@ -195,4 +217,5 @@ export function* apiSagaWatcher() {
   yield takeLatest(INIT_STOCK_DATA_INTRADAY, handleInitStockDataIntradaySaga);
   yield takeLatest(INIT_STOCK_LAST, handleInitLastDataSaga);
   yield takeLatest(INIT_STOCK_DATA_RANGE, handleInitStockDataRangeSaga);
+  yield takeLatest(PREDICT_STOCK, handlePredictStock);
 }

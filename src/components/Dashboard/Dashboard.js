@@ -19,17 +19,21 @@ import {
   stopQuoteChannel,
   initStockDataIntraday,
   initStockDataRange,
-  rangeChartSelector
+  rangeChartSelector,
+  predictionLoadingSelector,
+  predictionChartSelector
 } from "flux/ducks/stream";
 import { getCompanyData } from "flux/ducks/company";
 import { toggleCompanyModal } from "flux/ducks/modals";
+import { predictStock } from "flux/ducks/stream";
 import {
   DropdownV2,
   Button,
   Tabs,
   Tab,
   ContentSwitcher,
-  Switch
+  Switch,
+  InlineLoading
 } from "carbon-components-react";
 import { INDICATORS } from "constants/indicators";
 import combineSelectors from "utils/combineSelectors";
@@ -56,6 +60,9 @@ export class Dashboard extends Component {
     indicator: null
   };
   handleIndicator = ({ selectedItem }) => {
+    if (selectedItem === "AI Predictor News") {
+      this.props.predictStock();
+    }
     this.setState({ indicator: selectedItem });
   };
   openSeeMore = () => {
@@ -126,6 +133,13 @@ export class Dashboard extends Component {
         <CompanyModal />
         <ChartContainer>
           <ToolsContainer>
+            <Button className="sa--btn-see-more" onClick={this.openSeeMore}>
+              More Info{" "}
+              <i style={{ marginLeft: "2px" }} className="material-icons">
+                add_circle_outline
+              </i>
+            </Button>
+
             <DropdownV2
               className="sa--drop-down-indicator"
               label="Indicators"
@@ -133,15 +147,20 @@ export class Dashboard extends Component {
               items={INDICATORS}
               onChange={this.handleIndicator}
             />
-            <Button className="sa--btn-see-more" onClick={this.openSeeMore}>
-              More Info{" "}
-              <i style={{ marginLeft: "2px" }} className="material-icons">
-                add_circle_outline
-              </i>
-            </Button>
+
+            {this.props.predictionLoading ? (
+              <InlineLoading
+                className="sa--prediction-loading"
+                description="Loading data..."
+              />
+            ) : (
+              <div>{this.props.prediction}</div>
+            )}
           </ToolsContainer>
+
           <HistoricalChartContainer>
             <StockChart indicator={this.state.indicator} />
+
             <ContentSwitcher
               onChange={this.handleSwitchRange}
               selectedIndex={this.getSelectedRange()}
@@ -171,7 +190,9 @@ export class Dashboard extends Component {
 
 const mapStateToProps = combineSelectors({
   selectedStock: selectedStockSelector,
-  selectedRange: rangeChartSelector
+  selectedRange: rangeChartSelector,
+  predictionLoading: predictionLoadingSelector,
+  prediction: predictionChartSelector
 });
 
 const mapDispatchToProps = {
@@ -180,7 +201,8 @@ const mapDispatchToProps = {
   startQuoteChannel,
   initStockDataRange,
   toggleCompanyModal,
-  getCompanyData
+  getCompanyData,
+  predictStock
 };
 
 export default connect(

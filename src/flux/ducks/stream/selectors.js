@@ -61,3 +61,13 @@ export const rangeChartSelector = createSelector(
   streamSelector,
   stream => stream.chart.range
 );
+
+export const predictionChartSelector = createSelector(
+  streamSelector,
+  stream => stream.chart.prediction
+);
+
+export const predictionLoadingSelector = createSelector(
+  streamSelector,
+  stream => stream.chart.predictionLoading
+);
