@@ -1,3 +1,3 @@
 module.exports = {
-  RESOURCE_SERVER_URI: "https://stock-analyzer-api.huydam.com"
+  RESOURCE_SERVER_URI: 'https://www.stock-analyzer-api.huydam.com'
 };
