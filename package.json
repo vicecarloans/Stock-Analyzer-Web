@@ -7,6 +7,9 @@
     "open": "open http://localhost:3000",
     "heroku-postbuild": "yarn run build"
   },
+  "engines": {
+    "node": "^12.8"
+  },
   "dependencies": {
     "@zeit/next-css": "^1.0.2-canary.2",
     "@zeit/next-sass": "^1.0.1",
