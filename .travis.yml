@@ -37,7 +37,7 @@ deploy:
       branch: deployment
   - provider: heroku
     api_key:
-      secure: 84e50f7b-bdb8-4b1a-8d9a-fcf305fca481
+      secure: 35afc854-3c90-40ef-a699-2a0bca1a9b21
     app: stock-analyzer-huydam
     on:
       branch: develop
